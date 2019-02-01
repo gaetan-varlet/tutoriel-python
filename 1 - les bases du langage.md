@@ -13,6 +13,12 @@ python monScript.py # exécute le script en python 2
 python3 monScript.py # exécute le script en python 3
 ```
 
+## Exécuter un script sous windows
+
+ouvrir un script avec **IDLE** et faire `run` ou `F5`
+
+----
+
 ## Les différences Python2 vs Python3
 
 - **l'encodage** : en Python2, pour écrire des caractères accentués, il faut ajouter sur la première ligne du script la commande suivante, ce qui n'est pas nécessaire en Python3
@@ -46,9 +52,7 @@ nomVariable = valeur
 - les nombres entiers (**int**) : `25`
 - les nombres flottants (**float**) : `25.0`
 - les chaînes de caractères (**string**), entre simples quotes, doubles quotes, ou triples doubles quotes : `"""Hello World"""`
-- les booléens (**bool**) qui vaut *True* ou *False*
-
-la fonction `type(nomVariable)` donne le type de la variable
+- les booléens (**bool**) qui vallent *True* ou *False*
 
 Quelques astuces :
 ```py
@@ -57,11 +61,23 @@ v += 1 # est égal à var = var + 1 (incrémentation)
 a,b = b,a # permutation
 ```
 
+## Quelques fonctions utiles
+
 La fonction `print()` :
 ```py
-a=5
+a = 5
 print("a",a) # donne `a 5`
-# les paramètes sont séparés par un espace
+# les paramètres sont séparés par un espace
+```
+
+la fonction `type(nomVariable)` donne le type de la variable.  
+La fonction `input()` permet de récupérer la saisie de l'utilisateur.  
+Le fonction `int(texte)` permet de convertir une chaine de caractère en entier
+```py
+texte = input("Veuillez saisir un nombre : ") # 2019
+type(texte) # str
+annee = int(texte)
+type(annee) # int
 ```
 
 ## Les conditions
@@ -77,9 +93,73 @@ else:
 
 Les opérateurs de comparaison sont `< > <= >= == !=`
 
-Les mots clés `and`, `or` et `not` permettent d'enrichir les prédicats des conditions :
+Les mots clés `and`, `or` et `not` permettent d'enrichir les prédicats des conditions. Il est possible d'utiliser des parenthèses pour définir de manière précises les priorités
 ```py
 if var>5 and var<10:
 if var==5 or var==10:
 if not a==5: # équivalent à a!=5
+```
+Le mot clé `is` teste l'égalité de la référence d'une valeur
+```py
+homme = True
+if homme is not True:
+    print('Vous êtes une femme')
+else:
+    print('Vous êtes un homme')
+```
+
+## Les boucles
+
+
+### La boucle while
+```py
+while condition:
+    # instruction 1
+    # instruction 2
+```
+
+exemple :
+```py
+i = 0
+while i<10:
+    print("tout de boucle",i)
+    i+=1
+```
+
+
+### La boucle for
+
+elle permet de parcourir des séquences de plusieur données
+```py
+for element in sequence:
+```
+
+exemple qui affiche `H` puis `e` puis `l` puis `l` et `o`
+```py
+chaine = "Hello"
+for lettre in chaine:
+    print(lettre)
+```
+Il est possible d'utiliser `in` dans une condition. Autre exemple qui affiche `* e * * o`
+```py
+chaine = "Hello"
+for lettre in chaine:
+    if lettre in "AEIOUYaeiouy": # lettre est une voyelle
+        print(lettre)
+    else:
+        print("*")
+```
+
+### Les mots-clés break et continue
+
+- **break** permet d'interromptre une boucle
+- **continue** permet de passer au tour de boucle suivant sans terminer le tour de boucle en cours
+
+exemples :
+```py
+while 1: # 1 est toujours vrai -> boucle infinie
+    lettre = input("Tapez 'Q' pour quitter : ")
+    if lettre == "Q":
+        print("Fin de la boucle")
+        break
 ```
