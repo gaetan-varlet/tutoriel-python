@@ -156,6 +156,12 @@ for lettre in chaine:
         print("*")
 ```
 
+exemple en itérant de i allant de 1 à 5
+```py
+for i in range(1, 6):
+  print(i) # affiche i de 1 à 5
+```
+
 ### Les mots-clés break et continue
 
 - **break** permet d'interromptre une boucle
