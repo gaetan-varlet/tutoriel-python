@@ -65,14 +65,20 @@ a,b = b,a # permutation
 
 La fonction `print()` :
 ```py
+ # en utilisant la virgule comme séparateur, les paramètres sont séparés par un espace
 a = 5
 print("a",a) # donne `a 5`
-# les paramètres sont séparés par un espace
+
+# la concaténation (avec le +) ne fonctionne qu'avec des variables de type string et n'ajoute pas d'espace
+b='6'
+print("b"+b) # donne b6
 ```
 
 la fonction `type(nomVariable)` donne le type de la variable.  
 La fonction `input()` permet de récupérer la saisie de l'utilisateur.  
-Le fonction `int(texte)` permet de convertir une chaine de caractère en entier
+Le fonction `int(texte)` permet de convertir une donnée en entier.  
+Le fonction `float(texte)` permet de convertir une donnée en float.  
+Le fonction `str(texte)` permet de convertir une donnée en string.  
 ```py
 texte = input("Veuillez saisir un nombre : ") # 2019
 type(texte) # str
