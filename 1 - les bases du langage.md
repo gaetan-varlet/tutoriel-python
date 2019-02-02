@@ -42,6 +42,7 @@ print('Hello')
 10 / 5 # 2.0
 10 // 3 # 3, partie entière de la division
 10 % 3 # 1, modulo : reste de la division entière
+5 ** 2 # 25, puissance
 ```
 
 ## Les variables
@@ -75,7 +76,7 @@ print("b"+b) # donne b6
 ```
 
 la fonction `type(nomVariable)` donne le type de la variable.  
-La fonction `input()` permet de récupérer la saisie de l'utilisateur.  
+La fonction `input()` permet de récupérer la saisie de l'utilisateur au format string.  
 Le fonction `int(texte)` permet de convertir une donnée en entier.  
 Le fonction `float(texte)` permet de convertir une donnée en float.  
 Le fonction `str(texte)` permet de convertir une donnée en string.  
@@ -84,6 +85,17 @@ texte = input("Veuillez saisir un nombre : ") # 2019
 type(texte) # str
 annee = int(texte)
 type(annee) # int
+```
+La fonction `randint(a,b)` de la librairie `random` permet de générer un nombre entier aléatoire entre a et b inclus
+```py
+import random
+nombreAleatoire = random.randint(1,5)
+print(nombreAleatoire)
+
+
+from random import randint
+nombreAleatoire = randint(1,5)
+print(nombreAleatoire)
 ```
 
 ## Les conditions
@@ -97,13 +109,22 @@ else:
     print("nb est nul")
 ```
 
-Les opérateurs de comparaison sont `< > <= >= == !=`
+Les opérateurs de comparaison sont :
+- `<`
+- `>`
+- `<=`
+- `>=`
+- `==`
+- `!=`
 
-Les mots clés `and`, `or` et `not` permettent d'enrichir les prédicats des conditions. Il est possible d'utiliser des parenthèses pour définir de manière précises les priorités
+Les mots clés `and`, `or` et `not` permettent d'enrichir les prédicats des conditions. Il est possible d'utiliser des parenthèses pour définir de manière précises les priorités.
+`not` est plus fort que `and` qui lui-même est plus fort que `or`. On peut mettre des parenthèses pour changer cet ordre naturel.
 ```py
 if var>5 and var<10:
 if var==5 or var==10:
 if not a==5: # équivalent à a!=5
+True and False or True # True car (False or True)
+False and (False or True)  # True car (False and True)
 ```
 Le mot clé `is` teste l'égalité de la référence d'une valeur
 ```py

@@ -1,2 +1,4 @@
-for i in range(1, 6):
-  print(i)
+
+from random import randint
+nombreAleatoire = randint(1,5)
+print(nombreAleatoire)
