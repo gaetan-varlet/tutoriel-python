@@ -187,6 +187,9 @@ exemple en itérant de i allant de 1 à 5
 for i in range(1, 6):
   print(i) # affiche i de 1 à 5
 ```
+- `range(n)` crée un tableau de n éléments allant de 0 à n-1
+- si on lui passe 2 paramètres, on lui dit à quel chiffre commencer au lieu de 0 : `range(1, 6)`
+- on peut lui passer un troisième paramètre qui est le pas : `range(0,7,2)` va avoir comme valeur 0, 2, 4 et 6
 
 ### Les mots-clés break et continue
 
