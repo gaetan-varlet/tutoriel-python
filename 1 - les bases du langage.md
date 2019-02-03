@@ -201,3 +201,86 @@ while 1: # 1 est toujours vrai -> boucle infinie
         print("Fin de la boucle")
         break
 ```
+
+## Les fonctions
+
+```py
+def nom_de_la_fonction(parametre1, parametre2, parametre3, parametreN): # def pour define
+    # Bloc d'instructions
+
+nom_de_la_fonction('toto', 'tata') # appel de la fonction
+```
+
+- on peut mettre des valeurs par défaut
+- pn peut appeler une fonction en nommant les paramètres, ce qui est utile quand plusieurs ont une valeur par défaut
+```py
+def fonc(a=1, b=2, c=3, d=4, e=5):
+
+fonc(b=8, d=5) # a = 1, b = 8, c = 3, d = 5, e = 5
+```
+- on peut créer une documentation à la fonction appelée **docstring** entre triple guillemets que l'on retrouve avec la commande `help(nom_de_la_fonction)`
+```py
+def table(nb, max=10):
+    """Fonction affichant la table de multiplication par nb
+    de 1*nb à max*nb
+    
+    (max >= 0)"""
+    i = 0
+    while i < max:
+        print(i + 1, "*", nb, "=", (i + 1) * nb)
+        i += 1
+```
+
+- en Python, la signature d'une fonction est tout simplement son nom. Cela signifie qu'on ne peut définir deux fonctions du même nom (l'ancienne définition serait écrasée par la nouvelle)
+- certaines fonctions ne renvoient rien. Si on veut retourner une valeur, il faut utiliser le mot clé **return**. Cette instruction arrête le déroulement de la fonction, le code situé après le `return` ne s'exécutera pas
+```py
+def carre(valeur):
+    return valeur * valeur
+
+variable = carre(5) # contient 25
+```
+
+## Les fonctions lambda
+
+```py
+lambda arg1, arg2,… : instruction de retour
+```
+Il faut stocker la fonction lambda dans une variable pour pouvoir l'appeler
+```py
+carre = lambda x: x * x
+
+variable = carre(5) # contient 25
+```
+```py
+somme = lambda x, y: x + y
+
+var = somme(5,2) # contient 7
+```
+
+## Les modules
+
+Un module est un bout de code dans un fichier contenant des fonctions et variables. Pour l'utiliser, il faut l'**importer**. Il y a plein de modules disponibles avec Python sans qu'il soit nécessaire d'installer des bibliothèques supplémentaires.
+```py
+import math # importation du module math
+
+math.sqrt(16) # appel d'une fonction du module nomDuModule.nomFonction
+
+help(math) # renvoie la documentation du module math
+help(math.sqrt) # renvoie la documentation de la fonction sqrt
+```
+
+Il est possible de changer l'espace de nom du module importé :
+```py
+import math as mathematiques
+mathematiques.sqrt(25)
+```
+
+Il est aussi possible de n'importer qu'une fonction d'un module au lieu de tout le module complet
+```py
+from math import fabs
+res = fabs(-5) # retourne la valeur absolue 5
+```
+Il n'est plus nécessaire de préfixer avec `math.`, la méthode est chargé par **from** dans l'interpréteur au même niveau que les fonctions existantes comme *print*.
+```py
+from math import * # importe toutes les fonctions dans l'espace de nom principal
+```

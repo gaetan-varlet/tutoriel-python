@@ -1,4 +1,2 @@
-
-from random import randint
-nombreAleatoire = randint(1,5)
-print(nombreAleatoire)
+from math import fabs
+res = fabs(-5) # retourne la valeur absolue 5
