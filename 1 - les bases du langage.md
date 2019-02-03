@@ -31,6 +31,11 @@ print('Hello')
 5/2 = 2 # python2
 5/2 = 2.5 # python3
 ```
+- **la fonction input()** interprète le contenu saisie de l'utilisateur et renvoi le type correspondant en Python2, par exemple `int` alors qu'en Python3, elle retourne toujours un string
+```py
+python2 = input("Veuillez saisir un nombre : ") # 3, la variable sera un int
+python3 = input("Veuillez saisir un nombre : ") # 3, la variable sera un string
+```
 
 ## Les opérations
 
