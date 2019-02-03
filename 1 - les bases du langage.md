@@ -284,3 +284,53 @@ Il n'est plus nécessaire de préfixer avec `math.`, la méthode est chargé par
 ```py
 from math import * # importe toutes les fonctions dans l'espace de nom principal
 ```
+
+## Créer des modules et les utiliser
+
+```py
+# module calculs.py
+carre = lambda x: x * x
+```
+```py
+# fichier test.py dans le même répertoire que calculs.py
+import calculs
+res = calculs.carre(5) # contient 25
+```
+
+## Tester le module
+
+il est possible de tester le module dans le module lui-même sans que ce test ne s'exécute quand le module est appelé dans un autre fichier. Dans l'exemple ci-dessous, le test n'exécutera que si le module *calculs.py* est exécuté directement.
+```py
+# module calculs.py
+carre = lambda x: x * x
+
+# test de la fonction carre
+if __name__ == "__main__":
+    a = carre(4)
+    print(a)
+```
+La variable **__name__** est une variable de l'interpréteur. Si elle vaut **__main__**, cela signifie que le fichier appelé est lancé directement comme exécutable. Si elel vaut autre chose, le fichier est appelé comme module d'un autre fichier.
+
+## Les packages
+
+On peut regrouper des modules dans des packages, qui sont des répertoires qui contiennent d'autres répertoires (packages) ou des fichiers (modules)
+
+Exemple où l'on crée un package **monPackage** dans lequel on place **calculs.py**. Au même niveau que le package, on a **test.py** qui va appeler la méthode *carre* de *calculs.py*
+```py
+# fichier test.py
+import monPackage.calculs
+res = monPackage.calculs.carre(5) # contient 25
+```
+
+```py
+# autre possibilité
+from monPackage import calculs
+res = calculs.carre(5) # contient 25
+```
+
+```py
+## troisième possibilité
+from monPackage.calculs import carre
+res = carre(5) # contient 25
+```
+
