@@ -334,3 +334,83 @@ from monPackage.calculs import carre
 res = carre(5) # contient 25
 ```
 
+## Les exceptions
+
+Une exception est une erreur que peut rencontrer Python en exécutant le programme.
+```py
+File "test.py", line 1, in <module>
+    from monPackage import carre
+ImportError: cannot import name 'carre'
+```
+L'interpréteur précise le type d'erreur (`ImportError`), un message permettant de comprendre l'erreur qui vient de se produire (`cannot import name 'carre'`) et la ligne concernée par l'erreur (ligne 1 du module `carre`)
+
+Syntaxe du `try/catch` minimaliste :
+```py
+try:
+    # Bloc à essayer
+except:
+    # Bloc qui sera exécuté en cas d'erreur
+```
+
+- il est possible d'exécuter le bloc except pour un type d'exception précis, de les enchainer
+- il est possiblede récupérer le message d'erreur renvoyé par l'exception pour l'afficher
+- le mot-clé **else** va permettre d'exécuter une action si aucune erreur ne survient dans le bloc. Il est possible de s'en passer et de mettre le contenu du else dans le bloc try directement
+- le mot-clé **finally** permet d'exécuter du code après un bloc try, quel que soit le résultat de l'exécution du dit bloc
+```py
+try:
+    resultat = numerateur / denominateur
+except NameError as exception_retournee:
+    print("Voici l'erreur :", exception_retournee) # correspond au message renvoyé par l'exception
+    print("La variable numerateur ou denominateur n'a pas été définie.")
+except TypeError:
+    print("La variable numerateur ou denominateur possède un type incompatible avec la division.")
+except ZeroDivisionError:
+    print("La variable denominateur est égale à 0.")
+else:
+    print("Le résultat obtenu est", resultat)
+finally:
+    # Instruction(s) exécutée(s) qu'il y ait eu des erreurs ou non
+    print("coucou")
+```
+
+Le mot-clé **pass** permet de ne rien faire dans le bloc *except*. En effet, on est obligé de mettre un bloc catch après le bloc try.
+```py
+try:
+    a = 5/0
+except: # Rien ne doit se passer en cas d'erreur
+    pass
+
+print('hello')
+```
+`pass` n'est pas un mot-clé propre aux exceptions : on le trouve aussi dans des conditions ou dans des fonctions que l'on souhaite laisser vide
+
+## Les assertions
+
+Les assertions permettent de faire des vérications, généralement dans un bloc try...except. Le mot-clé **assert** teste la condition. S'il renvoie `True`, l'exécution se poursuit normalement, sinon une **AssertionError** est levée :
+```py
+annee = input("Saisissez une année supérieure à 0 :\n")
+try:
+    annee = int(annee) # Conversion de l'année
+    assert annee > 0
+except ValueError:
+    print("Vous n'avez pas saisi un nombre.")
+except AssertionError:
+    print("L'année saisie est inférieure ou égale à 0.")
+```
+
+## Lever une exception
+
+**raise** permet de lever une exception
+
+exemple ou on lève une exception de type `ValueError` si l'utilisateur saisit une année négative ou nulle :
+```py
+annee = input() # L'utilisateur saisit l'année
+try:
+    annee = int(annee) # On tente de convertir l'année
+    if annee<=0:
+        raise ValueError("l'année saisie est négative ou nulle")
+except ValueError:
+    print("La valeur saisie est invalide (l'année est peut-être négative).")
+```
+
+Dans cette exemple, l'erreur est interceptée immédiatement ce qui limite l'intérêt, mais il sera possible de l'intercepter à d'autres niveaux si on le souhaite.
