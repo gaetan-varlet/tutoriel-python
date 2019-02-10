@@ -1,4 +1,4 @@
-# Les bases du langage
+# Premiers pas en Python
 
 ## Lancer Python sous Linux
 
