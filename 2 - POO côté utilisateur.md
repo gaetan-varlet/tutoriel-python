@@ -473,3 +473,77 @@ print(premierObjet) # ['Paris', 'Lyon', 'Marseille']
 
 ## La portée des variables
 
+- une variable définie dans une fonction n'est pas accessible en dehors de celle-ci
+- une variable définie en amont d'une fonction est accessible dans la fonction
+- Python cherche d'abord dans l'espace local de la fonction, et si la variable n'existe pas, il va chercher dans l'espace local dans lequel la fonction a été appelé. A éviter, il vaut mieux passer par des variables globales
+- concernant l'accès aux variables extérieures à l'espace local, Python peut les lire mais **ne peut pas les modifier par affectation**. Si on essaie de modifier une variable exérieure à l'espace local, une nouvelle variable est en fait créé dans l'espace local :
+```py
+toto = "azerty"
+
+def maFonction(param1):
+    toto = "qwerty"
+    print(toto) # affiche qwerty
+    return param1 * param1
+
+maFonction(5)
+print(toto) # affiche azerty
+```
+- en revanche, il est possible de modifier un objet en appelant une méhtode de celui-ci :
+```py
+maListe = ['a','b','c']
+
+def ajouterElement(element):
+    maListe.append(element)
+
+print(maListe) # ['a', 'b', 'c']
+ajouterElement('d')
+print(maListe) # ['a', 'b', 'c', 'd']
+```
+
+## Les références d'objets
+
+- une variable est un nom identifiant pointant vers une référence d'un objet, qui est en quelque sort sa position en mémoire. **Deux variables peuvent donc pointer sur un même objet**
+- la fonction `id(objet)` renvoie la position de l'objet dans la mémoire Python sous la forme d'un entier
+- le mot clé `is` compare les id des objets alors que `==` compare le contenu des objets
+```py
+maListe = [1, 2, 3]
+maListe2 = maListe
+maListe2.append(4)
+print(maListe) # [1, 2, 3, 4]
+print(maListe2) # [1, 2, 3, 4]
+print(id(maListe)) # 140574641334408
+print(id(maListe2)) # 140574641334408
+print(maListe == maListe2) # True
+print(maListe is maListe2) # True
+```
+*maListe* et *maListe2* contiennent une référence vers le même objet : si on modifie l'objet depuis une des deux variables, le changement sera visible depuis les deux variables.
+
+- pour créer une variable qui ne pointe pas vers le même objet, le plus simple est de passer par le constructeur :
+```py
+maListe = [1, 2, 3]
+maListe2 = list(maListe)
+print(maListe == maListe2) # True
+print(maListe is maListe2) # False
+maListe2.append(4)
+print(maListe) # [1, 2, 3]
+print(maListe2) # [1, 2, 3, 4]
+```
+
+- cela ne fonctionne pas avec les entiers, les flottants, les chaînes de caractères. Ils n'ont aucune méthode travaillant sur l'objet lui-même. Les chaînes de caractères ne modifient pas l'objet mais renvoie un nouvel objet modifié
+
+
+## Les variables globales
+- les variables globales permettent de modifier par affectation des variables définies en dehors de l'espace local
+- en précisant `global` devant une variable, Python permet l'accès en lecture et en écriture à cette variable, ce qui signifie qu'on  peut changer sa valeur par affectation
+```py
+toto = "azerty"
+
+def maFonction(param1):
+    global toto # Python recherche totos en dehors de l'espace local de la fonction
+    toto = "qwerty"
+    print(toto) # affiche qwerty
+    return param1 * param1
+
+maFonction(5)
+print(toto) # affiche qwerty
+```
