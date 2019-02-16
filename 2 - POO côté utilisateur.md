@@ -298,23 +298,47 @@ print(liste2) # [0, 4, 16]
 
 ## Les dictionnaires
 
-Les dictionnaires sont des objets en contenant d'autres, où chaque objet est associé à une clé. Un dictionnaire n'est pas ordonné.
+Les dictionnaires sont des objets en contenant d'autres, où chaque objet est associé à une clé. Un dictionnaire n'est **pas ordonné**. La **clé est forcément unique**, mais deux valeurs peuvent être identiques. On peut mettre presque tous les types en clé et tous les types en valeur
 
-- création d'un dictionnaire
+
+- création d'un dictionnaire, ajout de valeurs au dictionnaire et accès à la valeur d'une clé :
 ```py
-monDictionnaire = {} # monDictionnaire = dict()
+monDictionnaire = {} # équivalent à monDictionnaire = dict()
 print(type(monDictionnaire)) # <class 'dict'>
 print(monDictionnaire) # {}
-```
-
-- ajouter des valeurs au dictionnaire et accès à la valeur d'une clé
-```py
-monDictionnaire = {} # monDictionnaire = dict()
 monDictionnaire['maCle1'] = 'maValeur1'
 monDictionnaire['maCle2'] = 'maValeur2'
 print(monDictionnaire) # {'maCle1': 'maValeur1', 'maCle2': 'maValeur2'}
 monDictionnaire['maCle1'] = 'maValeur3' # maj de la valeur de maCle1
 print(monDictionnaire) # {'maCle1': 'maValeur3', 'maCle2': 'maValeur2'}
 print(monDictionnaire['maCle1']) # maValeur3
+
+monDictionnaire['lat', 'long'] = "Ville" # la clé de l'élément Ville est un tuple
+print(monDictionnaire) # {('lat', 'long'): 'Paris', 'maCle2': 'maValeur2', 'maCle1': 'maValeur3'}
 ```
 
+- suppression d'un élément, avec `del` comme pour les listes, ou avec la méthode de dictionnaire `pop` qui renvoie la valeur supprimée
+```py
+print(monDictionnaire) # {'maCle1': 'maValeur1', 'maCle2': 'maValeur2'}
+del monDictionnaire['maCle1']
+print(monDictionnaire) # {'maCle2': 'maValeur2'}
+```
+```py
+print(monDictionnaire) # {'maCle1': 'maValeur1', 'maCle2': 'maValeur2'}
+valSup = monDictionnaire.pop('maCle1')
+print(monDictionnaire) # {'maCle2': 'maValeur2'}
+print(valSup) # maValeur1
+```
+
+
+
+
+## Les Set
+
+Un Set est un conteneur semblalbe aux listes, sauf qu'il ne peut contenir deux objets identiques.
+
+```py
+monSet = {"toto", "tata", "toto"} # 2 éléments sont identiques, un seul des deux sera dans le set
+print(monSet) # set(['tata', 'toto'])
+print(type(monSet)) # <type 'set'>
+```
