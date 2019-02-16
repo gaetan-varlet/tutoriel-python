@@ -330,7 +330,56 @@ print(monDictionnaire) # {'maCle2': 'maValeur2'}
 print(valSup) # maValeur1
 ```
 
+- stocker des références de fonctions
+```py
+# création de 2 fonctions qui écrivent dans la console
+def hello():
+    print('Hello')
+def coucou():
+    print('Coucou')
 
+mesFonctions={}
+# enregistrements des fonctions dans le dictionnaire
+# on ne met pas les parenthèses car on enregistre la définition de la fonction, on ne veut pas l'exécuter
+mesFonctions['hello'] = hello
+mesFonctions['coucou'] = coucou
+# appel de la fonction et exécution de celle-ci avec les parenthèses
+mesFonctions['hello']() # Hello
+```
+
+- parcourir d'un dictionnaire. L'ordre de parcours change car il n'y a pas d'ordre dans un dictionnaire. Utilisation des méthodes `keys()`, `values()` et `items()` :
+```py
+monDictionnaire = {} # équivalent à monDictionnaire = dict()
+monDictionnaire['maCle1'] = 'maValeur1'
+monDictionnaire['maCle2'] = 'maValeur2'
+monDictionnaire['maCle3'] = 'maValeur3'
+
+# parcours des clés du dictionnaire
+for cle in monDictionnaire.keys():
+    print(cle) # affiche maCle2, puis sur la ligne suivante maCle1 puis maCle3
+
+# parcours des valeurs du dictionnaire
+for valeur in monDictionnaire.values():
+    print(valeur) # affiche maValeur2, puis maValeur1 puis maVeleur3
+
+# parcours des clés et des valeurs
+for cle, valeur in monDictionnaire.items():
+    print("La clé {cle} contient la valeur {valeur}".format(cle=cle, valeur=valeur))
+```
+
+- récupérer les paramètres nommés d'une fonction dans un dictionnaire, avec `**`
+```py
+def maFonction(**parametres_nommes):
+    print("J'ai reçu en paramètres nommés : {}.".format(parametres_nommes))
+
+maFonction() # J'ai reçu en paramètres nommés : {}.
+maFonction(p=4, j=8) # J'ai reçu en paramètres nommés : {'p': 4, 'j': 8}.
+```
+
+- pour avoir une fonction qui accepte des paramètres nommés et non nommés, il faut faire comme dans l'exemple ci-dessous. Les paramètres non nommés se retrouveront dans la variable *en_liste* et les paramètres nommés dans la variable *en_dictionnaire*.
+```py
+def maFonction(*en_liste, **en_dictionnaire):
+```
 
 
 ## Les Set
@@ -342,3 +391,85 @@ monSet = {"toto", "tata", "toto"} # 2 éléments sont identiques, un seul des de
 print(monSet) # set(['tata', 'toto'])
 print(type(monSet)) # <type 'set'>
 ```
+
+
+## Les fichiers
+
+- les méthodes `getcwd()` (CWD = « Current Working Directory ») et `chdir()` (Change Directory) du module `os` permettent de savoir dans quel répertoire on se trouve et de changer de répertoire, grâce au déplacement relatif ou absolu
+```py
+import os
+
+print(os.getcwd()) # /home/gaetan/depot-github/tutoriel-python
+os.chdir("./scripts")
+print(os.getcwd()) # /home/gaetan/depot-github/tutoriel-python/scripts
+```
+
+- la méthode `open()` permet d'ouvrir un fichier
+    - avec le nom du fichier en paramètre (absolu ou relatif)
+    - et le mode d'ouverture (`r` en lecture,  `w` en écriture en écrasant le fichier, et `a` (append) en écriture en écrivant à la fin du fichier sans écraser l'ancier contenu). On peut ajouter à tous ces modes le signe `b` pour ouvrir le fichier en mode binaire
+    - la méthode crée un objet de la classe `TextIoWrapper`, nous allons utiliser des méthodes de cette classe pour interagir avec le fichier
+- la méthode `read()` renvoie tout le contenu du fichier, que l'on capture dans une chaîne de caractères
+- la méthode `write('chaîne a écrire')` permet d'écrire une chaîne de caractère dans le fichier. Elle retourne le nombre de caractères écrit. Si on souhaite écrire un autre type que le string, il faut les convertir en chaîne de caractères
+- la méthode `close()` ferme le fichier, ce qui rendra l'accès au fichier à d'autres applications
+
+exemple de lecture d'un fichier :
+```py
+monFichier = open('/home/gaetan/depot-github/tutoriel-python/scripts/fichierALire.txt', 'r')
+contenu = monFichier.read()
+print(monFichier)
+# <_io.TextIOWrapper name='/home/gaetan/depot-github/tutoriel-python/scripts/fichierALire.txt' mode='r' encoding='UTF-8'>
+print(contenu)
+# contenu de mon fichier
+# je m'appelle Gaëtan
+monFichier.close()
+
+lignes = contenu.split('\n') # découpage du fichier ligne par ligne dans un tableau
+print(lignes) # ['contenu de mon fichier', "je m'appelle Gaëtan"]
+```
+
+exemple d'écriture dans un fichier :
+```py
+# Création d'un fichier fichierEcrit.txt avec comme contenu "Hello World !"
+monFichier = open('/home/gaetan/depot-github/tutoriel-python/scripts/fichierEcrit.txt',  'w')
+monFichier.write('Hello World !')
+monFichier.close()
+```
+
+- le mot clé `with` crée un *context manager* qui vérifie que le fichier est ouvert et fermé même si des erreurs se produisent pendant le bloc. Il n'y a plus besoin d'appeler la méthode `close()`
+```py
+with open('/home/gaetan/depot-github/tutoriel-python/scripts/fichierALire.txt', 'r') as monFichier:
+    contenu = monFichier.read()
+    print(monFichier.closed) # affiche False car le fichier est encore ouvert
+print(contenu) # affiche le contenu du fichier
+print(monFichier.closed) # affiche True car le fichier a été fermé
+```
+
+- le module `pickle` permet d'enregistrer des objets dans un fichier en binaire, avec les classes **Pickler** pour enregistrer des objets dans un fichier et **Unpickler** pour lire des objets dans un fichier
+```py
+import pickle
+
+liste = ['Paris', 'Lyon', 'Marseille']
+
+# écriture dans le fichier fichierAvecUnObjet au format binaire (wb)
+with open('/home/gaetan/depot-github/tutoriel-python/scripts/fichierAvecUnObjet', 'wb') as fichier:
+    # création de l'objet Pickler en lui passant en paramètre le fichier dans lequel écrire
+    pickler = pickle.Pickler(fichier)
+    # la méthode dump du pickler permet d'enregistrer l'objet passé en paramètre
+    pickler.dump(liste)
+```
+
+```py
+import pickle
+
+# lecture dans le fichier fichierAvecUnObjet au format binaire (rb)
+with open('/home/gaetan/depot-github/tutoriel-python/scripts/fichierAvecUnObjet', 'rb') as fichier:
+    # création de l'objet Unpickler en lui passant en paramètre le fichier dans lequel lire
+    unpickler = pickle.Unpickler(fichier)
+    # la méthode load renvoie le premier objet qui a été lu. S'il y en a plusieurs, il faut l'appeler plusieurs fois
+    premierObjet = unpickler.load()
+print(premierObjet) # ['Paris', 'Lyon', 'Marseille']
+```
+
+
+## La portée des variables
+
