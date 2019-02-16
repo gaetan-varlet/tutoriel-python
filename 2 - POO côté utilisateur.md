@@ -115,12 +115,22 @@ print(liste) # []
 liste2 = [] # autre méthode pour créer une liste vide
 ```
 
-- création d'une liste et accès aux éléments
+- création d'une liste et accès aux éléments via leur indice
 ```py
 liste = [1, "deux", ["a", "b"]]
 print(liste[0]) # 1
 print(liste[1]) # deux
 print(liste[2]) # ['a', 'b']
+# récupérer le dernier élément
+print(liste[-1]) # ['a', 'b']
+print(liste[len(liste) - 1]) # ['a', 'b']
+```
+
+- la fonction `len(liste)` permet de compter le nombre d'éléments d'une liste, la méthode `count(element)` compte le nombre de fois ou un élément est présent dans la liste
+```py
+liste = ["zero", "deux", "trois","un", "un"]
+print(len(liste)) # 5
+print(liste.count("un")) # 2
 ```
 
 - il est possible de remplacer un élément par un autre car les listes sont **mutables** contrairement aux string
@@ -165,13 +175,17 @@ liste = liste1 + liste2
 print(liste) # [1, 2, 3, 4, 5, 6]
 ```
 
-- supprimer un élément avec son indice avec `del`
+- supprimer un élément avec son indice avec la fonction `del`, ou avec la méthode `pop(indice)`
 ```py
 texte = "toto"
 del texte # supprime la variable
 
 liste = [1, 2, 3]
 del liste[1] # supprime l'élément à l'indice 1
+print(liste) # [1, 3]
+
+liste = [1, 2, 3]
+print(liste.pop(1)) # 2 (retourne l'élément supprimé)
 print(liste) # [1, 3]
 ```
 
@@ -200,6 +214,54 @@ for element in enumerate(liste):
 liste = ['a', 'b', 'c']
 for i, element in enumerate(liste):
     print(i, element) # 0, a puis 1, b puis 2, c
+```
+- récupérer des sous-listes se fait comme pour extraire des sous-chaînes de caractères :
+```py
+liste = ['a','b','c','d','e']
+string = "abcde"
+print(liste[0:2]) # ['a', 'b']
+print(liste[:2]) # ['a', 'b']
+print(liste[2:-1]) # ['c', 'd'] (à partir du troisième jusqu'à la fin sauf le dernier)
+print(liste[1:]) # ['b', 'c', 'd', 'e']
+print(liste[:]) # ['a', 'b', 'c', 'd', 'e']
+```
+
+- pour savoir si un élément est dans une liste, on peut utiliser le mot clé `in` :
+```py
+liste = ['a', 'b', 'c', 'b']
+print('a' in liste) # True
+print('toto' in liste) # False
+```
+
+- `sort()` permet de trier les listes (trie dans l'ordre croissant par défaut)
+```py
+liste1 = [0, 3, 2, 1, 4]
+liste1.sort()
+print(liste1) # [0, 1, 2, 3, 4]
+
+liste1 = [0, 3, 2, 1, 4]
+liste1.sort(reverse=True)
+print(liste1) # [4, 3, 2, 1, 0]
+
+liste1 = [0, 3, 2, 1, 4]
+liste1.sort()
+liste1.reverse()
+print(liste1) # [4, 3, 2, 1, 0]
+```
+
+
+## Les compréhensions de liste
+
+permet de filtrer ou modifier des listes
+```py
+liste1 = [0, 1, 2, 3, 4, 5]
+liste2 = [nb * nb for nb in liste1]
+print(liste2) # [0, 1, 4, 9, 16, 25]
+```
+```py
+liste1 = [0, 1, 2, 3, 4, 5]
+liste2 = [nb * nb for nb in liste1 if nb % 2 == 0] # filtrage avec un if
+print(liste2) # [0, 4, 16]
 ```
 
 
@@ -269,30 +331,6 @@ maFonction("a", "b") # Les paramètres sont : ('a', 'b').
 monTuple = ('a', 'b', 'c')
 print(monTuple) # ('a', 'b', 'c')
 print(*monTuple) # a b c
-```
-
-- `sort()` permet de trier les listes
-```py
-liste1 = [0, 3, 2, 1, 4]
-liste1.sort()
-print(liste1) # [0, 1, 2, 3, 4]
-liste1.sort(reverse=True)
-print(liste1) # [4, 3, 2, 1, 0]
-```
-
-
-## Les compréhensions de liste
-
-permet de filtrer ou modifier des listes
-```py
-liste1 = [0, 1, 2, 3, 4, 5]
-liste2 = [nb * nb for nb in liste1]
-print(liste2) # [0, 1, 4, 9, 16, 25]
-```
-```py
-liste1 = [0, 1, 2, 3, 4, 5]
-liste2 = [nb * nb for nb in liste1 if nb % 2 == 0] # filtrage avec un if
-print(liste2) # [0, 4, 16] 
 ```
 
 
