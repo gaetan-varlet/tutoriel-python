@@ -249,6 +249,26 @@ liste1.reverse()
 print(liste1) # [4, 3, 2, 1, 0]
 ```
 
+- `max(liste)` et `min(liste)` renvoie le maximum et le minimum d'une liste (et plus généralement d'un itérable) :
+```py
+maListe = [0,3,-1,2]
+print(max(maListe)) # 3
+print(min(maListe)) # -1
+```
+
+- `split(separateur)` est une méthode de chaîne qui permet de découper la chaîne en liste en spécifiant la chaîne séparatrice
+```py
+texte = "Bonjour tout le monde"
+liste = texte.split(" ")
+print(liste) # ['Bonjour', 'tout', 'le', 'monde']
+```
+
+- `"".join(liste)` permet de coller les éléments d'une liste en string
+```py
+liste = ['Bonjour', 'tout', 'le', 'monde']
+print(" ".join(liste)) # Bonjour tout le monde
+```
+
 
 ## Les compréhensions de liste
 
@@ -303,19 +323,6 @@ print(c) # 5
 print(d) # 2
 ```
 
-- `split(separateur)` est une méthode de chaîne qui permet de découper la chaîne en liste en spécifiant la chaîne séparatrice
-```py
-texte = "Bonjour tout le monde"
-liste = texte.split(" ")
-print(liste) # ['Bonjour', 'tout', 'le', 'monde']
-```
-
-- `"".join(liste)` permet de coller les éléments d'une liste en string
-```py
-liste = ['Bonjour', 'tout', 'le', 'monde']
-print(" ".join(liste)) # Bonjour tout le monde
-```
-
 - l'étoile `*` permet dans une définition de fonction qu'un nombre de paramètres variables soient capturés dans un tuple.
 ```py
 def maFonction(*param):
@@ -347,12 +354,17 @@ print(monDictionnaire) # {}
 monDictionnaire['maCle1'] = 'maValeur1'
 monDictionnaire['maCle2'] = 'maValeur2'
 print(monDictionnaire) # {'maCle1': 'maValeur1', 'maCle2': 'maValeur2'}
-monDictionnaire['maCle1'] = 'maValeur3' # maj de la valeur de maCle1
+monDictionnaire['maCle1'] = 'maValeur3' # maj de la valeur de maCle1 car la clé exite déjà
 print(monDictionnaire) # {'maCle1': 'maValeur3', 'maCle2': 'maValeur2'}
 print(monDictionnaire['maCle1']) # maValeur3
+print(monDictionnaire.get('maCle1')) # maValeur3, équivalent à monDictionnaire['maCle1']
 
 monDictionnaire['lat', 'long'] = "Ville" # la clé de l'élément Ville est un tuple
 print(monDictionnaire) # {('lat', 'long'): 'Paris', 'maCle2': 'maValeur2', 'maCle1': 'maValeur3'}
+```
+- la méthode `get(cle)` retourne la valeur associée à cle, `None` si la clé n'existe pas alors que `monDico[cle]` retourne une erreur si la clé n'exixte pas. On peut également spécifier une valeur par défaut :
+```py
+print(monDictionnaire.get('maCle5', 'oupsy')) # oupsy
 ```
 
 - suppression d'un élément, avec `del` comme pour les listes, ou avec la méthode de dictionnaire `pop` qui renvoie la valeur supprimée
@@ -400,7 +412,7 @@ for cle in monDictionnaire.keys():
 for valeur in monDictionnaire.values():
     print(valeur) # affiche maValeur2, puis maValeur1 puis maVeleur3
 
-# parcours des clés et des valeurs
+# parcours des clés et des valeurs renvoyées sous forme de tuple
 for cle, valeur in monDictionnaire.items():
     print("La clé {cle} contient la valeur {valeur}".format(cle=cle, valeur=valeur))
 ```
