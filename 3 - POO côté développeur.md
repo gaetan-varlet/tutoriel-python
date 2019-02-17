@@ -2,7 +2,7 @@
 
 ## La notion de classe
 
-Une classe est un modèle suivant lequel on va créer des objets. Dans la classe seront définis les attributs et les méthodes.  
+Une classe est un modèle suivant lequel on va créer des objets. Dans la classe seront définis les attributs et les méthodes.
 - Python a définit certaines classes : les nombres, les chaînes, les listes... Il est également possible d'en créer d'autres avec le mot clé `class`
 - il faut définir le constructeur avec ``def __init__(self)`, *self* étant l'objet en train de se créer. Il est possible de passer d'autres paramètres pour remplir les attributs de l'objet
 - on instancie un objet de la classe en appelant le constructeur
@@ -84,4 +84,6 @@ print(moi.__dict__) # {'nom': 'Varlet', 'age': 31, 'prenom': 'Gaëtan', 'ville':
 ```
 
 ## Les propriétés
- 
+
+- l'**encapsulation** est un principe qui consiste à **cacher ou protéger certaines données** de notre objet : dans la plupart des langages objets, on ne peut pas faire depuis l'extérieur de la classe `monObjet.monAttribut`, il faut passer par des **accesseurs** et **mutateurs**
+- Python a une philosophie un peu différente : il n'y a pas d'attributs privés, tout est public. En comportement classique, on pourra donc accéder et modifier les attributs en faisant `monObjet.monAttribut`. Dans certains cas, on créera des **propriétés**

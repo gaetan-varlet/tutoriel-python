@@ -267,7 +267,7 @@ print(liste2) # [0, 4, 16]
 
 ## Les tuples
 
-Les tuples sont des listes immuables, qu'on ne peut modifier. Un tuple se définit comme une liste, sauf qu'on utilise comme délimiteur des parenthèses au lieu des crochets.
+Les tuples sont des listes immuables, qu'on ne peut pas modifier. Un tuple se définit comme une liste, sauf qu'on utilise comme délimiteur des parenthèses au lieu des crochets.
 
 ```py
 tupleVide = ()
