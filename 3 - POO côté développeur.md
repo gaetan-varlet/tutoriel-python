@@ -4,10 +4,10 @@
 
 Une classe est un modèle suivant lequel on va créer des objets. Dans la classe seront définis les attributs et les méthodes.
 - Python a définit certaines classes : les nombres, les chaînes, les listes... Il est également possible d'en créer d'autres avec le mot clé `class`
-- il faut définir le constructeur avec ``def __init__(self)`, *self* étant l'objet en train de se créer. Il est possible de passer d'autres paramètres pour remplir les attributs de l'objet
+- il faut définir le constructeur avec `def __init__(self)`, *self* étant l'objet en train de se créer. Il est possible de passer d'autres paramètres pour remplir les attributs de l'objet
 - on instancie un objet de la classe en appelant le constructeur
 - on peut modifier la valeur d'un attribut en faisant `monObjet.attribut = nouvelleValeur`
-- il est possible de créer des attributs de classe, avant le constructeur sous la forme `NomClasse.nomAttributClasse`. On y accède également sous cette forme. Cet attribut n'appartient pas à l'objet mais est partagé entre tous les objets de cette classe
+- il est possible de créer des attributs de classe. Cet attribut n'appartient pas à l'objet mais est partagé entre tous les objets de cette classe. Il se déclare avant le constructeur, et son accès se fait sous la forme `NomClasse.nomAttributClasse`
 
 ```py
 class Person:
@@ -29,8 +29,8 @@ moi.age = 31
 print(moi.age) # 31
 ```
 
-- les méthodes d'instances (propre à chaque objet) sont des actions agissant sur l'objet, et se déclare dans la classe sous la forme `def nomMethode(self, autresParams):`
-- le mot clé `self` correspond à l'objet qui appelle la méthode. Faire `monObjet.maMethode(param)` est donv équivalent à `MaClass.maMethode(monObjet, param)`
+- les méthodes d'instances (propre à chaque objet) sont des actions agissant sur l'objet, et se déclarent dans la classe sous la forme `def nomMethode(self, autresParams):`
+- le mot clé `self` correspond à l'objet qui appelle la méthode. Faire `monObjet.maMethode(param)` est donc équivalent à `MaClass.maMethode(monObjet, param)`
 
 ```py
 # ajout d'une méthode dans la classe
@@ -83,7 +83,43 @@ print(moi.ville) # Montrouge
 print(moi.__dict__) # {'nom': 'Varlet', 'age': 31, 'prenom': 'Gaëtan', 'ville': 'Montrouge'}
 ```
 
+
 ## Les propriétés
 
 - l'**encapsulation** est un principe qui consiste à **cacher ou protéger certaines données** de notre objet : dans la plupart des langages objets, on ne peut pas faire depuis l'extérieur de la classe `monObjet.monAttribut`, il faut passer par des **accesseurs** et **mutateurs**
-- Python a une philosophie un peu différente : il n'y a pas d'attributs privés, tout est public. En comportement classique, on pourra donc accéder et modifier les attributs en faisant `monObjet.monAttribut`. Dans certains cas, on créera des **propriétés**
+- Python a une philosophie un peu différente : il n'y a pas d'attributs privés, tout est public. En comportement classique, on pourra donc accéder et modifier les attributs en faisant `monObjet.monAttribut`. Dans certains cas, on créera des **propriétés** pour faire respecter l'encapsulation propre au langage, de manière transparente pour l'utilisateur. Cela peut peut être utile si une action particulière doit être menée lors de l'accès ou la modification à un attribut
+- une propriété se crée dans le corps de la classe
+    - d'abord, dans le constructeur, ajout d'un `_` devant l'attribut, par exemple `_age`. La convention veut qu'on n'accède pas depuis l'extérieur de la classe à un attribut commençant pour `_`
+    - création de méthodes commençant par `_get` et `_set`, auxquelles on ne doit également pas accéder de l'extérieur (convention)
+    - il faut ensuite déclarer la proriété sans `_` en lui donnant en paramètre : getter (accès à l'attribut), setter (maj de l'attribut), méthode pour supprimer l'attribut, méthode pour demander de l'aide sur l'attribut. Les 2 premières méthodes sont souvent utilisées, les autres moins : `age = property(_getAge, _setAge)`
+    - quand on accède à l'attribut age ou qu'on veut modifier le modifier, Python sachant que c'est une proriété nous redirige vers le getter ou le setter
+
+```py
+class Person:
+    personnesCrees = 0
+    def __init__(self, nom, prenom):
+        Person.personnesCrees += 1
+        self.nom = nom
+        self.prenom = prenom
+        self._age = 30
+        self.ville = 'Paris'
+    
+    def _getAge(self):
+        print("accès à l'âge")
+        return self._age
+    
+    def _setAge(self, nouvelAge):
+        print("maj de l'âge")
+        self._age = nouvelAge
+    
+    age = property(_getAge, _setAge)
+
+
+moi = Person('Varlet', 'Gaëtan')
+print(moi.age) # 30
+moi.age = 31
+print(moi.age) # 31
+```
+
+
+## Les méthodes spéciales
