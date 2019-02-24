@@ -362,9 +362,14 @@ print(monDictionnaire.get('maCle1')) # maValeur3, équivalent à monDictionnaire
 monDictionnaire['lat', 'long'] = "Ville" # la clé de l'élément Ville est un tuple
 print(monDictionnaire) # {('lat', 'long'): 'Paris', 'maCle2': 'maValeur2', 'maCle1': 'maValeur3'}
 ```
-- la méthode `get(cle)` retourne la valeur associée à cle, `None` si la clé n'existe pas alors que `monDico[cle]` retourne une erreur si la clé n'exixte pas. On peut également spécifier une valeur par défaut :
+- la méthode `get(cle)` retourne la valeur associée à *cle*, `None` si la clé n'existe pas alors que `monDico[cle]` retourne une erreur si la clé n'exixte pas. On peut également spécifier une valeur par défaut :
 ```py
 print(monDictionnaire.get('maCle5', 'oupsy')) # oupsy
+```
+
+- la méthode `update` permet de mettre à jour une valeur d'un dictionnaire
+```py
+monDictionnaire.update({'maCle1': 'maValeur4'}) # équivalent à monDictionnaire['maCle1'] = 'maValeur4'
 ```
 
 - suppression d'un élément, avec `del` comme pour les listes, ou avec la méthode de dictionnaire `pop` qui renvoie la valeur supprimée
@@ -378,6 +383,17 @@ print(monDictionnaire) # {'maCle1': 'maValeur1', 'maCle2': 'maValeur2'}
 valSup = monDictionnaire.pop('maCle1')
 print(monDictionnaire) # {'maCle2': 'maValeur2'}
 print(valSup) # maValeur1
+```
+
+- vérifier si une clé est dans un dictionnaire
+```py
+dictionnaire = {'cle1':30, 'cle2': 40}
+
+if 'cle1' in dictionnaire: # équivalent à dictionnaire.keys()
+    print('est dans les clés')
+
+if 30 in dictionnaire.values():
+    print('est dans les valeurs')
 ```
 
 - stocker des références de fonctions

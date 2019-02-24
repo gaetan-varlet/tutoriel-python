@@ -208,10 +208,10 @@ while 1: # 1 est toujours vrai -> boucle infinie
 ## Les fonctions
 
 ```py
-def nom_de_la_fonction(parametre1, parametre2, parametre3, parametreN): # def pour define
+def nomDeLaFonction(parametre1, parametre2, parametre3, parametreN): # def pour define
     # Bloc d'instructions
 
-nom_de_la_fonction('toto', 'tata') # appel de la fonction
+nomDeLaFonction('toto', 'tata') # appel de la fonction
 ```
 
 - on peut mettre des valeurs par défaut
