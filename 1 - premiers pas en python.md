@@ -129,7 +129,7 @@ if var>5 and var<10:
 if var==5 or var==10:
 if not a==5: # équivalent à a!=5
 True and False or True # True car (False or True)
-False and (False or True)  # True car (False and True)
+False and (False or True)  # False car (False and True)
 ```
 Le mot clé `is` teste l'égalité de la référence d'une valeur
 ```py
@@ -161,7 +161,7 @@ while i<10:
 
 ### La boucle for
 
-elle permet de parcourir des séquences de plusieur données
+elle permet de parcourir des séquences de plusieurs données
 ```py
 for element in sequence:
 ```
@@ -193,7 +193,7 @@ for i in range(1, 6):
 
 ### Les mots-clés break et continue
 
-- **break** permet d'interromptre une boucle
+- **break** permet d'interrompre une boucle
 - **continue** permet de passer au tour de boucle suivant sans terminer le tour de boucle en cours
 
 exemples :
@@ -347,7 +347,7 @@ ImportError: cannot import name 'carre'
 ```
 L'interpréteur précise le type d'erreur (`ImportError`), un message permettant de comprendre l'erreur qui vient de se produire (`cannot import name 'carre'`) et la ligne concernée par l'erreur (ligne 1 du module `carre`)
 
-Syntaxe du `try/catch` minimaliste :
+Syntaxe minimaliste :
 ```py
 try:
     # Bloc à essayer

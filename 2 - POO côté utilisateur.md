@@ -128,7 +128,7 @@ print(liste[len(liste) - 1]) # ['a', 'b']
 
 - la fonction `len(liste)` permet de compter le nombre d'éléments d'une liste, la méthode `count(element)` compte le nombre de fois ou un élément est présent dans la liste
 ```py
-liste = ["zero", "deux", "trois","un", "un"]
+liste = ["zero", "deux", "trois", "un", "un"]
 print(len(liste)) # 5
 print(liste.count("un")) # 2
 ```
@@ -328,7 +328,7 @@ print(d) # 2
 def maFonction(*param):
      print("Les paramètres sont : {}.".format(param))
 
-maFonction() # maFonction("a", "b")
+maFonction() # Les paramètres sont : ().
 maFonction("a") # Les paramètres sont : ('a',).
 maFonction("a", "b") # Les paramètres sont : ('a', 'b').
 ```
@@ -359,7 +359,7 @@ print(monDictionnaire) # {'maCle1': 'maValeur3', 'maCle2': 'maValeur2'}
 print(monDictionnaire['maCle1']) # maValeur3
 print(monDictionnaire.get('maCle1')) # maValeur3, équivalent à monDictionnaire['maCle1']
 
-monDictionnaire['lat', 'long'] = "Ville" # la clé de l'élément Ville est un tuple
+monDictionnaire['lat', 'long'] = "Paris" # la clé de l'élément Paris est un tuple
 print(monDictionnaire) # {('lat', 'long'): 'Paris', 'maCle2': 'maValeur2', 'maCle1': 'maValeur3'}
 ```
 - la méthode `get(cle)` retourne la valeur associée à *cle*, `None` si la clé n'existe pas alors que `monDico[cle]` retourne une erreur si la clé n'exixte pas. On peut également spécifier une valeur par défaut :
@@ -542,7 +542,7 @@ print(premierObjet) # ['Paris', 'Lyon', 'Marseille']
 - une variable définie dans une fonction n'est pas accessible en dehors de celle-ci
 - une variable définie en amont d'une fonction est accessible dans la fonction
 - Python cherche d'abord dans l'espace local de la fonction, et si la variable n'existe pas, il va chercher dans l'espace local dans lequel la fonction a été appelé. A éviter, il vaut mieux passer par des variables globales
-- concernant l'accès aux variables extérieures à l'espace local, Python peut les lire mais **ne peut pas les modifier par affectation**. Si on essaie de modifier une variable exérieure à l'espace local, une nouvelle variable est en fait créé dans l'espace local :
+- concernant l'accès aux variables extérieures à l'espace local, Python peut les lire mais **ne peut pas les modifier par affectation**. Si on essaie de modifier une variable extérieure à l'espace local, une nouvelle variable est en fait créé dans l'espace local :
 ```py
 toto = "azerty"
 
@@ -568,7 +568,7 @@ print(maListe) # ['a', 'b', 'c', 'd']
 
 ## Les références d'objets
 
-- une variable est un nom identifiant pointant vers une référence d'un objet, qui est en quelque sort sa position en mémoire. **Deux variables peuvent donc pointer sur un même objet**
+- une variable est un nom identifiant pointant vers une référence d'un objet, qui est en quelque sorte sa position en mémoire. **Deux variables peuvent donc pointer sur un même objet**
 - la fonction `id(objet)` renvoie la position de l'objet dans la mémoire Python sous la forme d'un entier
 - le mot clé `is` compare les id des objets alors que `==` compare le contenu des objets
 ```py
