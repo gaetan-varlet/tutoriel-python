@@ -36,6 +36,13 @@ Python avancé
 - les 10 erreurs du débutant
 - astuces
 
+Python pour la Data Science
+- Jupyter Notebbok
+- NumPy
+- Pandas : manipulation de données (dataframe)
+- Matplotlib et Seaborn : visualisation de données
+- scikit learn (machine learning)
+
 Introduction au Machine Learning
 - Data Preprocessing
 - Régression
