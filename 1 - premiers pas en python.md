@@ -356,7 +356,7 @@ except:
 ```
 
 - il est possible d'exécuter le bloc except pour un type d'exception précis, de les enchainer
-- il est possiblede récupérer le message d'erreur renvoyé par l'exception pour l'afficher
+- il est possible de récupérer le message d'erreur renvoyé par l'exception pour l'afficher
 - le mot-clé **else** va permettre d'exécuter une action si aucune erreur ne survient dans le bloc. Il est possible de s'en passer et de mettre le contenu du else dans le bloc try directement
 - le mot-clé **finally** permet d'exécuter du code après un bloc try, quel que soit le résultat de l'exécution du dit bloc
 ```py
