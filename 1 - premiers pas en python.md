@@ -312,7 +312,7 @@ if __name__ == "__main__":
     a = carre(4)
     print(a)
 ```
-La variable **__name__** est une variable de l'interpréteur. Si elle vaut **__main__**, cela signifie que le fichier appelé est lancé directement comme exécutable. Si elel vaut autre chose, le fichier est appelé comme module d'un autre fichier.
+La variable **__name__** est une variable de l'interpréteur. Si elle vaut **__main__**, cela signifie que le fichier appelé est lancé directement comme exécutable. Si elle vaut autre chose, le fichier est appelé comme module d'un autre fichier.
 
 ## Les packages
 
