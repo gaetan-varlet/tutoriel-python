@@ -215,7 +215,7 @@ nomDeLaFonction('toto', 'tata') # appel de la fonction
 ```
 
 - on peut mettre des valeurs par défaut
-- pn peut appeler une fonction en nommant les paramètres, ce qui est utile quand plusieurs ont une valeur par défaut
+- on peut appeler une fonction en nommant les paramètres, ce qui est utile quand plusieurs ont une valeur par défaut
 ```py
 def fonc(a=1, b=2, c=3, d=4, e=5):
 
