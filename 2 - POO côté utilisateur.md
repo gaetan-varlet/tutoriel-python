@@ -426,7 +426,7 @@ for cle in monDictionnaire.keys():
 
 # parcours des valeurs du dictionnaire
 for valeur in monDictionnaire.values():
-    print(valeur) # affiche maValeur2, puis maValeur1 puis maVeleur3
+    print(valeur) # affiche maValeur2, puis maValeur1 puis maValeur3
 
 # parcours des clés et des valeurs renvoyées sous forme de tuple
 for cle, valeur in monDictionnaire.items():
