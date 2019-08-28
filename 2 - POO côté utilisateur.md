@@ -362,7 +362,7 @@ print(monDictionnaire.get('maCle1')) # maValeur3, équivalent à monDictionnaire
 monDictionnaire['lat', 'long'] = "Paris" # la clé de l'élément Paris est un tuple
 print(monDictionnaire) # {('lat', 'long'): 'Paris', 'maCle2': 'maValeur2', 'maCle1': 'maValeur3'}
 ```
-- la méthode `get(cle)` retourne la valeur associée à *cle*, `None` si la clé n'existe pas alors que `monDico[cle]` retourne une erreur si la clé n'exixte pas. On peut également spécifier une valeur par défaut :
+- la méthode `get(cle)` retourne la valeur associée à *cle*, `None` si la clé n'existe pas alors que `monDico[cle]` retourne une erreur si la clé n'existe pas. On peut également spécifier une valeur par défaut :
 ```py
 print(monDictionnaire.get('maCle5', 'oupsy')) # oupsy
 ```
