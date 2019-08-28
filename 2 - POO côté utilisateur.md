@@ -472,7 +472,7 @@ print(os.getcwd()) # /home/gaetan/depot-github/tutoriel-python/scripts
 
 - la méthode `open()` permet d'ouvrir un fichier
     - avec le nom du fichier en paramètre (absolu ou relatif)
-    - et le mode d'ouverture (`r` en lecture,  `w` en écriture en écrasant le fichier, et `a` (append) en écriture en écrivant à la fin du fichier sans écraser l'ancier contenu). On peut ajouter à tous ces modes le signe `b` pour ouvrir le fichier en mode binaire
+    - et le mode d'ouverture (`r` en lecture,  `w` en écriture en écrasant le fichier, et `a` (append) en écriture en écrivant à la fin du fichier sans écraser l'ancien contenu). On peut ajouter à tous ces modes le signe `b` pour ouvrir le fichier en mode binaire
     - la méthode crée un objet de la classe `TextIoWrapper`, nous allons utiliser des méthodes de cette classe pour interagir avec le fichier
 - la méthode `read()` renvoie tout le contenu du fichier, que l'on capture dans une chaîne de caractères
 - la méthode `write('chaîne a écrire')` permet d'écrire une chaîne de caractère dans le fichier. Elle retourne le nombre de caractères écrit. Si on souhaite écrire un autre type que le string, il faut les convertir en chaîne de caractères
