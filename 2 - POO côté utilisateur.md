@@ -413,7 +413,7 @@ mesFonctions['coucou'] = coucou
 mesFonctions['hello']() # Hello
 ```
 
-- parcourir d'un dictionnaire. L'ordre de parcours change car il n'y a pas d'ordre dans un dictionnaire. Utilisation des méthodes `keys()`, `values()` et `items()` :
+- parcourir un dictionnaire. L'ordre de parcours change car il n'y a pas d'ordre dans un dictionnaire. Utilisation des méthodes `keys()`, `values()` et `items()` :
 ```py
 monDictionnaire = {} # équivalent à monDictionnaire = dict()
 monDictionnaire['maCle1'] = 'maValeur1'
