@@ -554,7 +554,7 @@ def maFonction(param1):
 maFonction(5)
 print(toto) # affiche azerty
 ```
-- en revanche, il est possible de modifier un objet en appelant une méhtode de celui-ci :
+- en revanche, il est possible de modifier un objet en appelant une méthode de celui-ci :
 ```py
 maListe = ['a','b','c']
 
