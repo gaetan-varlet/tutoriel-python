@@ -218,7 +218,6 @@ for i, element in enumerate(liste):
 - récupérer des sous-listes se fait comme pour extraire des sous-chaînes de caractères :
 ```py
 liste = ['a','b','c','d','e']
-string = "abcde"
 print(liste[0:2]) # ['a', 'b']
 print(liste[:2]) # ['a', 'b']
 print(liste[2:-1]) # ['c', 'd'] (à partir du troisième jusqu'à la fin sauf le dernier)
@@ -249,11 +248,25 @@ liste1.reverse()
 print(liste1) # [4, 3, 2, 1, 0]
 ```
 
+- `count(element)` permet de connaitre le nombre d'occurences de l'élément en paramètre
+```py
+liste = [1, 2, 3, 4, 3, 3]
+print(liste.count(2)) # 1
+print(liste.count(3)) # 3
+```
+
 - `max(liste)` et `min(liste)` renvoie le maximum et le minimum d'une liste (et plus généralement d'un itérable) :
 ```py
 maListe = [0,3,-1,2]
 print(max(maListe)) # 3
 print(min(maListe)) # -1
+```
+
+- `sum(liste)` et `len(liste)` renvoie la somme des éléments d'une liste et le nombre d'éléments dans la liste
+```py
+liste = [1, 2, 3, 4]
+print(sum(liste)) # 10
+print(len(liste)) # 4
 ```
 
 - `split(separateur)` est une méthode de chaîne qui permet de découper la chaîne en liste en spécifiant la chaîne séparatrice
