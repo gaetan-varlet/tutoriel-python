@@ -80,6 +80,8 @@ print(tab)
 print(tab>50)
 # filtre le tableau en fonction de la condition
 tab[tab>50]
+tab[tab>=50 & tab<=70]
+tab[tab>80 | tab <30]
 ```
 
 ### Concaténation de tableaux
