@@ -463,7 +463,7 @@ def maFonction(*en_liste, **en_dictionnaire):
 
 ## Les Set
 
-Un Set est un conteneur semblalbe aux listes, sauf qu'il ne peut contenir deux objets identiques.
+Un Set est un conteneur semblable aux listes, sauf qu'il ne peut contenir deux objets identiques.
 
 ```py
 monSet = {"toto", "tata", "toto"} # 2 éléments sont identiques, un seul des deux sera dans le set
