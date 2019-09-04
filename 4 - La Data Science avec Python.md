@@ -22,13 +22,16 @@ import numpy
 
 # tableau à une dimension
 tableau = numpy.array([1, 2, 3])
-print(tableau)
-print(type(tableau))
+print(tableau) # [1 2 3]
+print(type(tableau)) # <class 'numpy.ndarray'>
 
 # tableau à deux dimensions : le 1er sous-tableau correspond à la 1ere ligne, le 2ème à la 2ème ligne...
 tableau2 = numpy.array([[1,2,3],[4,5,6],[7,8,9]])
 print(tableau2)
-print(type(tableau2))
+# [[1 2 3]
+# [4 5 6]
+# [7 8 9]]
+print(type(tableau2))  # <class 'numpy.ndarray'>
 ```
 
 ### Notion due vue et de copie d'un tableau
@@ -39,17 +42,17 @@ print(type(tableau2))
 ```py
 tableau = numpy.array([1, 2, 3, 4, 5])
 tab2 = tableau[0:2]
-print(tab2)
+print(tab2) # [1 2]
 tab2[0]=5
-print(tab2)
-print(tableau)
+print(tab2) # [5 2]
+print(tableau) # [5 2 3 4 5]
 
 tableau = numpy.array([1, 2, 3, 4, 5])
 tab2 = tableau[0:2].copy()
-print(tab2)
+print(tab2) # [1 2]
 tab2[0]=5
-print(tab2)
-print(tableau)
+print(tab2) # [5 2]
+print(tableau) # [1 2 3 4 5]
 ```
 
 ### Accéder aux éléments d'un tableau
@@ -60,14 +63,14 @@ print(tableau)
 ```py
 tableau2 = numpy.array([[1,2,3],[4,5,6],[7,8,9]])
 # afficher l'élément sur la 2e ligne et la 3e colonne
-print(tableau2[1,2])
-print(tableau2[1,-1])
+print(tableau2[1,2]) # 6
+print(tableau2[1,-1]) # 6
 # afficher la première ligne
-print(tableau2[0,:])
+print(tableau2[0,:]) # [1 2 3]
 # afficher la première colonne
-print(tableau2[:,0])
-# afficher la première ligne, et les deux premières colonnes (TODO vérif)
-print(tableau2[0,0:2])
+print(tableau2[:,0]) # [1 4 7]
+# afficher la première ligne, et les deux premières colonnes
+print(tableau2[0,0:2]) # [1 2]
 ```
 
 ### Explorer et filtrer un tableau bidimensionnel
@@ -75,13 +78,13 @@ print(tableau2[0,0:2])
 ```py
 # création d'un tableau de 3 lignes et 2 colonnes avec des entiers aléatoires entre 0 et 100
 tab = numpy.random.randint(100, size=(3,2))
-print(tab)
+print(tab) #[[77 31] [47 56] [99 62]]
 # remplace chaque valeur du tableau par True ou False en fonction de la condition
-print(tab>50)
+print(tab>50) # [[True False] [False True] [True True]]
 # filtre le tableau en fonction de la condition
-tab[tab>50]
-tab[tab>=50 & tab<=70]
-tab[tab>80 | tab <30]
+tab[tab>50] # array([77, 56, 99, 62])
+tab[(tab>=50) & (tab<=70)] # array([56, 62])
+tab[(tab>80) | (tab <30)] # array([99])
 ```
 
 ### Concaténation de tableaux
