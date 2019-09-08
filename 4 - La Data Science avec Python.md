@@ -12,7 +12,7 @@ Tuto openclassrooms : https://openclassrooms.com/fr/courses/4452741-decouvrez-le
 - structure de données principale : **ndarray** pour **N-dimensional array** : tableau à une dimension (vecteur), tableau à 2 dimensions, à 3 dimensions...
 - ndarray se manipule comme les listes mais ne peut contenir qu'un seul type de données.
 
-### Création d'un ndarray
+### Création d'un ndarray
 
 - les ndarrays sont modifiables
 - `numpy.array(liste)` permet de créer un tableau
@@ -55,7 +55,7 @@ print(tab2) # [5 2]
 print(tableau) # [1 2 3 4 5]
 ```
 
-### Accéder aux éléments d'un tableau
+### Accéder aux éléments d'un tableau
 
 - pour les tableaux unidimentionnels, le fonctionnement est le même que pour les listes
 - pour les tableaux bidimensionnels, la logique reste la même
@@ -87,11 +87,14 @@ tab[(tab>=50) & (tab<=70)] # array([56, 62])
 tab[(tab>80) | (tab <30)] # array([99])
 ```
 
-### Concaténation de tableaux
+
+### Concaténation de tableaux
+
 
 ### Split de tableaux
 
-### Calculs sur les tableaux
+
+### Calculs sur les tableaux
 
 
 ## Pandas
