@@ -166,11 +166,52 @@ numpy.mean(tab, axis=1)
 ### Lecture d'un fichier CSV
 
 ```py
+# lecture d'un fichier texte
 tab = numpy.genfromtxt("fichier.csv", delimiter=",", dtype=int)
+print(tab)
+# mise à jour de la première colonne
+tab[:,0] = tab[:,0] * 0.85
+# mise à jour de la deuxième colonne jusqu'à la dernière
+tab[:,1:] = tab[:,1:] * 0.09
+print(tab)
+# nombre de lignes dans la 3e colonne est supérieure à 1000
+len(tab[tab[:,2]>1000])
+# somme de la première colonne
+numpy.sum(tab[:,0])
 ```
 
 
 ## Pandas
+
+- amène une structure de données : le **Dataframe**
+- tableau de type Excel
+- possibilité d'avoir des noms de colonnes et de lignes
+- possibilité de mélanger les types de données
+- créé pour le langage R, puis adapté dans Python dans la bibliothèque Pandas
+- possibilité de créer un dataframe depuis un dictionnaire ou une liste
+
+### Les séries avec Pandas
+
+
+### Les dataframes avec Pandas
+
+
+### Lire et écrire un fichier
+
+
+### Accéder aux éléments d'un dataframe
+
+
+### Ajouter/supprimer des colonnes d'un dataframe
+
+
+### Explorer un dataframe
+
+
+### Filtrer un Dataframe selon des conditions
+
+
+### Grouper un dataframe sur une ou plusieurs colonnes (group by)
 
 
 
