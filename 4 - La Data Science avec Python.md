@@ -34,7 +34,7 @@ print(tableau2)
 print(type(tableau2))  # <class 'numpy.ndarray'>
 ```
 
-### Notion due vue et de copie d'un tableau
+### Notion de vue et de copie d'un tableau
 
 - il est possible d'extraire un sous-ensemble d'un tableau, sans le copier, ce qui fait que lorsqu'on modifie une valeur de ce sous-tableau, cela modifie également le tableau d'origine
 - il est possible de faire la même chose sous forme de copie pour ne pas modifier le tableau d'origine lorsqu'on modifie le sous-tableau
