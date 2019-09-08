@@ -328,12 +328,35 @@ df = pandas.read_csv("nom_fichier")
 df.to_csv("nom_fichier.csv", index=False)
 ```
 
+fichier source :
+
+```
+prenom, age, taille, poids
+gaetan, 30, 183, 65
+florine, 28, 157, 43
+louis, 1, 80, 10
+```
+
+```py
+df = pandas.read_csv("dataframe.csv")
+#     prenom   age   taille   poids
+# 0   gaetan    30      183      65
+# 1  florine    28      157      43
+# 2    louis     1       80      10
+```
+
 ### Accéder aux éléments d'un dataframe
 
 - il est possible de remplacer l'index des lignes (1, 2, 3...) par une colonne. Cela va permettre de sélectionner une ligne par son index via la valeur de cette colonne
 
 ```py
-df = df.set_index("nomColonne")
+# il faut assigner le résultat à une variable si on souhaite le stocker car set_index ne modifie pas le dataframe sur lequel il s'applique
+df = df.set_index("prenom")
+#           age   taille   poids
+# prenom                        
+# gaetan     30      183      65
+# florine    28      157      43
+# louis       1       80      10
 ```
 
 
