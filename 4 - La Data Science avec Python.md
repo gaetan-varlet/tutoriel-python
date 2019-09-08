@@ -188,18 +188,90 @@ numpy.sum(tab[:,0])
 - possibilité d'avoir des noms de colonnes et de lignes
 - possibilité de mélanger les types de données
 - créé pour le langage R, puis adapté dans Python dans la bibliothèque Pandas
-- possibilité de créer un dataframe depuis un dictionnaire ou une liste
+- possibilité de créer un dataframe depuis un dictionnaire, une liste, ou encore un ndarray numpy
 
 ### Les séries avec Pandas
 
+une série est un objet unidimensionnel
+- variables quantitatives
+- variables qualitatives
+
+```py
+import pandas
+
+serie = pandas.Series([29, 31, 1, 40, 24, 60, 54])
+print(type(serie))
+print(serie)
+
+serie = pandas.Series([29, 31, 1, 29, 24, 60, 54], index=["Florine", "Gaëtan", "Louis", "Kévin", "Thibaut", "Papa", "Maman"])
+print(type(serie))
+print(serie)
+print(serie["Louis"]) # 1
+print(serie[2]) # 1
+print(serie[["Florine","Louis"]])
+print(serie[serie>12])
+# obtenir des informations sur la distribution de la série
+serie.describe()
+serie.max()
+```
 
 ### Les dataframes avec Pandas
+
+Création d'un dataframe à partir d'une liste et d'un dictionnaire
+
+```py
+personnes = [('Gaëtan', 'Varlet', 1988), ('Florine', 'Greciet', 1990)]
+labels = ['Prénom', 'Nom', 'Année de naissance']
+df1 = pandas.DataFrame.from_records(personnes, columns=labels)
+print(type(df1))
+print(df1)
+
+personnes2 = [{'Prénom':'Gaëtan', 'Nom':'Varlet', 'Année de naissance':1988},{'Prénom':'Louis', 'Nom':'Varlet', 'Année de naissance':2018}]
+df2 = pandas.DataFrame(personnes2)
+print(type(df2))
+print(df2)
+```
+
+Création d'un dataframe à partir d'un tableau Numpy
+
+```py
+tableau = numpy.array([[1,2,3],[4,5,6],[7,8,9]])
+dataframe = pandas.DataFrame(tableau, columns=["col 1", "col 2", "col 3"])
+print(type(dataframe))
+print(dataframe)
+```
+
+Création d'un dataframe à partir de séries Pandas
+
+```py
+serie1 = pandas.Series([29, 31, 1, 29, 24, 60, 54], index=["Florine", "Gaëtan", "Louis", "Kévin", "Thibaut", "Papa", "Maman"])
+serie2 = pandas.Series([30, 32, 2, 32], index=["Florine", "Gaëtan", "Louis", "Aurélien"])
+df = pandas.DataFrame({"Groupe 1" : serie1, "Groupe 2" : serie2})
+print(df)
+```
 
 
 ### Lire et écrire un fichier
 
+- pour lire un fichier texte, on peut utiliser les méthodes `read_table()` ou `read_csv()`
+- pour écrire un dataframe dans un fichier, il faut utiliser la méthode `to_csv()`
+- il existe des méthodes `read_excel()` et `to_excel()` pour travailler avec les fichiers Excel
+
+```py
+# récupération d'un jeu de données sur https://www.kaggle.com/
+df = pandas.read_table("nom_fichier", sep=",")
+df = pandas.read_csv("nom_fichier")
+# écriture du dataframe dans un fichier CSV
+df.to_csv("nom_fichier.csv", index=False)
+```
 
 ### Accéder aux éléments d'un dataframe
+
+- il est possible de remplacer l'index des lignes (1, 2, 3...) par une colonne. Cela va permettre de sélectionner une ligne par son index via la valeur de cette colonne
+
+```py
+df = df.set_index("nomColonne")
+```
 
 
 ### Ajouter/supprimer des colonnes d'un dataframe
