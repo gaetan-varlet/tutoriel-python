@@ -96,7 +96,7 @@ tab[(tab>80) | (tab <30)] # array([99])
 tab1 = numpy.array([[1, 2], [3, 4]])
 tab2 = numpy.array([[5, 6], [7, 8]])
 tabConc = numpy.concatenate([tab1, tab2])
-print(tabConc)
+print(tabConc) # [[1 2] [3 4] [5 6] [7 8]]
 ```
 
 - il est possible de faire un empilement vertical ou horizontal avec `vstack()` et `hstack()` :
@@ -104,10 +104,11 @@ print(tabConc)
 ```py
 tab3 = numpy.array([5, 6])
 tabV = numpy.vstack([tab1, tab3])
-print(tabV)
+print(tabV) # [[1 2] [3 4] [5 6]]
+
 tab4 = numpy.array([[7],[8]])
-tabH = numpy.hstack([tab3, tab4])
-print(tabH)
+tabH = numpy.hstack([tab1, tab4])
+print(tabH) # [[1 2 7] [3 4 8]]
 ```
 
 ### Split de tableaux
@@ -119,18 +120,19 @@ il est possible de couper un tableau grâce à fonctions :
 ```py
 tab = numpy.array([2,4,6,8,10,12])
 tabSplit = numpy.split(tab,[2,3])
-print(tabSplit)
+print(tabSplit) # [array([2, 4]), array([6]), array([ 8, 10, 12])]
+# ​même chose en spécifiant les tableaux splités
 tabS1,tabS2, tabS3 = numpy.split(tab,[2,3])
-print(tabS1, tabS2, tabS3)
+print(tabS1, tabS2, tabS3) # [2 4] [6] [ 8 10 12]
 
 tableau = numpy.array([[1,2,3],[4,5,6],[7,8,9]])
 tableauV1, tableauV2 = numpy.vsplit(tableau, [2])
-print(tableauV1)
-print(tableauV2)
+print(tableauV1) # [[1 2 3] [4 5 6]]
+print(tableauV2) # [[7 8 9]]
 
 tableauH1, tableauH2 = numpy.hsplit(tableau, [1])
-print(tableauH1)
-print(tableauH2)
+print(tableauH1) # [[1] [4] [7]]
+print(tableauH2) # [[2 3] [5 6] [8 9]]
 ```
 
 ### Calculs sur les tableaux
@@ -138,12 +140,23 @@ print(tableauH2)
 ```py
 tab = numpy.random.randint(100, size=(10,8))
 print(tab)
+# [[85 87 48 68 65 91 19 91]
+# [ 5 90 79 75 38 71 80 62]
+# [82 66  9  5 87 79 98  2]
+# [25 44 23 94 23 88 91 13]
+# [86 41 12 79 63 65 77 35]
+# [23 25 87 87 14 89  5 82]
+# [ 2 28 94  3 63 67 52 78]
+# [47 24 63 13  4 77 40 17]
+# [70 94 39 89 23 93 26 94]
+# [58 30 83 43 16 73 82 21]]
+
 # ajouter une valeur à tous les éléments d'un tableau
 tab2 = tab+2
 print(tab2)
 print(tab*3)
 # faire une opération sur une ligne ou colonne particulière, par exemple sur la première colonne
-print(tab[:,0] / 10)
+print(tab[:,0] / 10) # [8.5 0.5 8.2 2.5 8.6 2.3 0.2 4.7 7.  5.8]
 
 # utilisation des fonctions propres à Numpy
 numpy.add(tab, 2)
@@ -151,12 +164,16 @@ numpy.subtract(tab, 5)
 numpy.multiply(tab, 3)
 numpy.divide(tab, 6)
 
+# calcul de la somme
+numpy.sum(tab) # 4300
 # calcul de la moyenne en utilisant la fonction de numpy
-numpy.mean(tab)
+numpy.mean(tab) # 53.75
 # calcul de la moyenne en utilisant la méthode de ndarray
 tab.mean()
 tab.min()
 tab.max()
+tab.sum()
+tab.std()
 # calcul de la moyenne par colonne
 numpy.mean(tab, axis=0)
 # calcul de la moyenne par ligne
@@ -168,27 +185,35 @@ numpy.mean(tab, axis=1)
 ```py
 # lecture d'un fichier texte
 tab = numpy.genfromtxt("fichier.csv", delimiter=",", dtype=int)
-print(tab)
+print(tab) # [[ 30 183  65] [ 28 157  43] [  1  80  10]]
+
 # mise à jour de la première colonne
-tab[:,0] = tab[:,0] * 0.85
+tab[:,0] = tab[:,0] + 2
+print(tab) # [[ 32 183  65] [ 30 157  43] [  3  80  10]]
 # mise à jour de la deuxième colonne jusqu'à la dernière
-tab[:,1:] = tab[:,1:] * 0.09
-print(tab)
-# nombre de lignes dans la 3e colonne est supérieure à 1000
-len(tab[tab[:,2]>1000])
+tab[:,1:] = tab[:,1:] * 1.2
+tab # array([[ 32, 219,  78], [ 30, 188,  51], [  3,  96,  12]])
+
+# nombre de lignes
+len(tab) # 3
+# nombre de colonnes dans la première ligne
+len(tab[0])
+# nombre de lignes dont la 3e colonne est supérieure à 50
+len(tab[tab[:,2]>50]) # 2
 # somme de la première colonne
-numpy.sum(tab[:,0])
+numpy.sum(tab[:,0]) # 65
+tab[:,0].sum() # 65
 ```
 
 
 ## Pandas
 
 - amène une structure de données : le **Dataframe**
-- tableau de type Excel
+- correspond à un tableau de type Excel
 - possibilité d'avoir des noms de colonnes et de lignes
 - possibilité de mélanger les types de données
 - créé pour le langage R, puis adapté dans Python dans la bibliothèque Pandas
-- possibilité de créer un dataframe depuis un dictionnaire, une liste, ou encore un ndarray numpy
+- possibilité de créer un dataframe depuis un fichier, un dictionnaire, une liste, ou encore un ndarray numpy
 
 ### Les séries avec Pandas
 
@@ -200,19 +225,41 @@ une série est un objet unidimensionnel
 import pandas
 
 serie = pandas.Series([29, 31, 1, 40, 24, 60, 54])
-print(type(serie))
+print(type(serie)) # <class 'pandas.core.series.Series'>
 print(serie)
+# 0    29
+# 1    31
+# 2     1
+# 3    40
+# 4    24
+# 5    60
+# 6    54
+# dtype: int64
 
 serie = pandas.Series([29, 31, 1, 29, 24, 60, 54], index=["Florine", "Gaëtan", "Louis", "Kévin", "Thibaut", "Papa", "Maman"])
-print(type(serie))
 print(serie)
+# Florine    29
+# Gaëtan     31
+# Louis       1
+# Kévin      29
+# Thibaut    24
+# Papa       60
+# Maman      54
+# dtype: int64
 print(serie["Louis"]) # 1
 print(serie[2]) # 1
 print(serie[["Florine","Louis"]])
-print(serie[serie>12])
+# Florine    29
+# Louis       1
+# dtype: int64
+print(serie[serie>35])
+# Papa     60
+# Maman    54
+# dtype: int64
+
 # obtenir des informations sur la distribution de la série
-serie.describe()
-serie.max()
+serie.describe() # donne des informations, sur la distribution de la série (moyenne, écart-type, nombre d'éléments...)
+serie.sum()
 ```
 
 ### Les dataframes avec Pandas
@@ -223,13 +270,18 @@ Création d'un dataframe à partir d'une liste et d'un dictionnaire
 personnes = [('Gaëtan', 'Varlet', 1988), ('Florine', 'Greciet', 1990)]
 labels = ['Prénom', 'Nom', 'Année de naissance']
 df1 = pandas.DataFrame.from_records(personnes, columns=labels)
-print(type(df1))
+print(type(df1)) # <class 'pandas.core.frame.DataFrame'>
 print(df1)
+#     Prénom      Nom  Année de naissance
+# 0   Gaëtan   Varlet                1988
+# 1  Florine  Greciet                1990
 
 personnes2 = [{'Prénom':'Gaëtan', 'Nom':'Varlet', 'Année de naissance':1988},{'Prénom':'Louis', 'Nom':'Varlet', 'Année de naissance':2018}]
 df2 = pandas.DataFrame(personnes2)
-print(type(df2))
 print(df2)
+#    Année de naissance     Nom  Prénom
+# 0                1988  Varlet  Gaëtan
+# 1                2018  Varlet   Louis
 ```
 
 Création d'un dataframe à partir d'un tableau Numpy
@@ -237,8 +289,11 @@ Création d'un dataframe à partir d'un tableau Numpy
 ```py
 tableau = numpy.array([[1,2,3],[4,5,6],[7,8,9]])
 dataframe = pandas.DataFrame(tableau, columns=["col 1", "col 2", "col 3"])
-print(type(dataframe))
 print(dataframe)
+#    col 1  col 2  col 3
+# 0      1      2      3
+# 1      4      5      6
+# 2      7      8      9
 ```
 
 Création d'un dataframe à partir de séries Pandas
@@ -248,8 +303,16 @@ serie1 = pandas.Series([29, 31, 1, 29, 24, 60, 54], index=["Florine", "Gaëtan",
 serie2 = pandas.Series([30, 32, 2, 32], index=["Florine", "Gaëtan", "Louis", "Aurélien"])
 df = pandas.DataFrame({"Groupe 1" : serie1, "Groupe 2" : serie2})
 print(df)
+#           Groupe 1  Groupe 2
+# Aurélien       NaN      32.0
+# Florine       29.0      30.0
+# Gaëtan        31.0      32.0
+# Kévin         29.0       NaN
+# Louis          1.0       2.0
+# Maman         54.0       NaN
+# Papa          60.0       NaN
+# Thibaut       24.0       NaN
 ```
-
 
 ### Lire et écrire un fichier
 
