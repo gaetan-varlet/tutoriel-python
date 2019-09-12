@@ -331,10 +331,10 @@ df.to_csv("nom_fichier.csv", index=False)
 fichier source :
 
 ```
-prenom, age, taille, poids
-gaetan, 30, 183, 65
-florine, 28, 157, 43
-louis, 1, 80, 10
+prenom,age,taille,poids
+gaetan,30,183,65
+florine,28,157,43
+louis,1,80,10
 ```
 
 ```py
@@ -359,18 +359,111 @@ df = df.set_index("prenom")
 # louis       1       80      10
 ```
 
+- il existe 2 méthodes pour accéder au dataframe : `iloc`, qui fonctionne avec les index des lignes et colonnes, et `loc` qui fonctionne avec les labels
+- la méthode `head(n)` affiche les *n* premières lignes du tableau
+
+```py
+# afficher la 2eme ligne et la 3e colonne
+df.iloc[1,2] # 43
+# afficher la 3e ligne
+df.iloc[2,:]
+# afficher uniquement la 3e colonne pour toutes les lignes
+df.iloc[:,2]
+# afficher la taille de gaetan
+df.loc['gaetan', 'taille']
+# afficher toutes les informations sur gaetan
+df.loc['gaetan',:]
+# afficher toutes les tailles
+df.loc[:,'taille']
+# afficher les colonnes taille et poids pour tous les individus
+df.loc[:,['taille', 'poids']]
+df.iloc[:, [1,2]]
+df.iloc[:,1:3]
+# afficher les 2 premières lignes
+df.iloc[0:2,:]
+df.head(2)
+```
 
 ### Ajouter/supprimer des colonnes d'un dataframe
 
+```py
+# création d'une colonne à partir d'autres colonnes
+imc = df['poids']/(df['taille']*df['taille']/10000)
+# affectation de cette colonne au dataframe
+df['imc']=imc
+print(df)
+# suppression de cette colonne
+df = df.drop(['imc'], axis=1) # axis=1 permet de dire que l'on travaille sur les colonnes
+print(df)
+```
 
-### Explorer un dataframe
+### Manipuler un dataframe
 
+```py
+# connaître le nombre de lignes et de colonnes d'un dataframe
+df.shape # (3, 4)
+# connaître le nom des colonnes d'un dataframe
+df.columns # Index(['prenom', 'age', 'taille', 'poids'], dtype='object')
+
+# connaître le nombre de valeurs manquantes pour une colonne
+df['taille'].isna() # renvoie True ou False pour chaque ligne
+df['taille'].isna().sum() # renvoie 1 car il y a une valeur manquante dans la colonne taille
+df.isna() # même chose pour tout le tableau
+df.isna().sum() # indique pour chaque colonne le nombre de valeurs manquantes
+
+# supprimer toutes les lignes où il y a au moins une valeur manquante
+dfSansNa = df.dropna() # le tableau ne contient plusq que 2 lignes sur les 3
+df.shape # (2, 4)
+
+# trier un tableau selin une variable (de manière croissante par défaut)
+df = df.sort_values(by='poids')
+
+# obtenir le type des variables
+df.dtypes
+# prenom     object
+# age         int64
+# taille    float64
+# poids       int64
+# dtype: object
+
+# obtenir des informations sur les variables numériques
+df.describe()
+
+# obtenir des infos sur toutes les variables, cela permet d'avoir quelques informations sur les variables qualitatives
+df.describe(include='all')
+
+# permet d'obtenir le nombre d'occurences de chaque modalité d'une variable qualitative
+df['prenom'].value_counts()
+
+# modifier le contenu du dataframe
+# transformer les 'g' minuscules en majuscules
+df['prenom'] = df['prenom'].apply(lambda x: x.replace('g', 'G'))
+# transformer une variable int en chaîne de caractères
+df['taille'] = df['taille'].apply(lambda x: str(x))
+df.dtypes # permet de vérifier le type des variables
+```
 
 ### Filtrer un Dataframe selon des conditions
 
+```py
+# récupérer les individus pesant plus de 40kg
+df.loc[df['poids']>40,:]
+
+# trouver le nombre de personne avec le prenom louis
+len(df.loc[df['prenom']=='louis',:])
+
+# trouver les louis qui pèsent plus de 15kg
+df.loc[(df['prenom']=='louis') & (df['poids']>15)]
+```
 
 ### Grouper un dataframe sur une ou plusieurs colonnes (group by)
 
-
+```py
+# permet d'obtenir des statistiques sur les variables quantitatives par modalité d'une variable qualitative
+# on va par exemple voir la taille moyenne et le poids moyen pour les hommes et par les femmes
+df2.groupby('sexe').describe()
+# même chose avec 2 variables qualitatives dans le group by
+df2.groupby(['sexe','prenom']).describe()
+```
 
 ## Matplotlib et Seaborn pour visualiser les données
