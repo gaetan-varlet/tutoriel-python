@@ -467,3 +467,202 @@ df2.groupby(['sexe','prenom']).describe()
 ```
 
 ## Matplotlib et Seaborn pour visualiser les données
+
+- *Matplotlib* est la bibliothèque la plus utilisée en Python pour visualiser les données
+- *Seaborn* est une autre bibliothèque de visualisation de données basé sur *Matplotlib*
+
+### Création d'un premier graphique
+
+```py
+# import du module pyplot qui suffit à faire des visualisations
+import matplotlib.pyplot
+
+# initialisation d'un graphique vide à 2 axes
+pyplot.plot()
+# permet de supprimer les crochets au dessus du graphique
+pyplot.draw()
+
+# création d'un graphique qui trace la courbe sans montrer les points
+# les coordonnées des points sont données dans 2 tableaux pour l'axe des abcisses puis l'axe des ordonnées
+pyplot.plot([1,2,3,4,5], [1,4,9,16,25])
+pyplot.draw()
+
+# affichage des points
+pyplot.plot([1,2,3,4,5], [1,4,9,16,25], marker='o')
+
+# affichage des points sans la ligne
+pyplot.plot([1,2,3,4,5], [1,4,9,16,25], marker='o', linestyle='')
+```
+
+### Ajout d'un titre et de labels aux axes
+
+```py
+pyplot.plot([1,2,3,4,5], [1,4,9,16,25], marker='o', linestyle='')
+pyplot.xlabel('Axe des abcisses')
+pyplot.ylabel('Axe des ordonnées')
+pyplot.title('Titre du graphique')
+pyplot.draw()
+
+# possibilité de déplacer les titres, par exemple pour remonter légèrement le titre
+pyplot.title('Titre du graphique', y=1.05)
+```
+
+### Changez les couleurs
+
+```py
+# création d'un nuage de points avec scatter à la place de plot. Scatter crée directement un nuage de points sans tracer la courbe
+# figure.figsize permet de redimensionner le graphique
+pyplot.rcParams['figure.figsize']=[8,5]
+pyplot.scatter([1,2,3,4,5], [1,4,9,16,25])
+pyplot.draw()
+
+# l'option c=list() permet de colorer les points différemments selon leur valeur, en utilisant les couleurs par défaut de scatter
+pyplot.scatter([1,2,3,4,5], [1,4,9,16,25], c=list([1, 4, 9, 16, 25]))
+
+# l'option c=list() permet de colorer les points différemments selon leur valeur, en utilisant l'échelle de couleur seismic (du bleu vers le rouge)
+
+pyplot.scatter([1,2,3,4,5], [1,4,9,16,25], c=list([1, 4, 9, 16, 25]), cmap='seismic')
+# colorbar() permet de mettre en légende la barre des couleurs
+pyplot.colorbar()
+```
+
+### Changer la taille ou la forme des points
+
+```py
+# marker permet de changer le type de point, par exemple une croix
+# s permet de changer la taille des points sur le graphique
+pyplot.scatter([1,2,3,4,5], [1,4,9,16,25], marker='x', s=100)
+```
+
+### Enregistrer un graphique
+
+```py
+# savefig() permet d'enregistrer un graphique
+# bbox_inches='tight' permet de réduire les blancs autour du graphique
+pyplot.savefig('monGraphique2.png', bbox_inches='tight')
+```
+
+### Les différents types de graphiques
+
+- les nuages de point : `plot()` et  `scatter()`
+- les diagrammes en bâton : `bar()`
+- les boîtes à moustaches : `boxplot()`
+- les diagrammes circulaires : `pie()`
+
+```py
+# exemple d'un  diagramme en bâtons
+pyplot.bar(['Hommes', 'Femmes'], [60, 40])
+pyplot.draw()
+# changement des couleurs du diagramme en bâtons
+pyplot.bar(['Hommes', 'Femmes'], [60, 40], color=['blue', 'red'])
+# les options pour le titre et les labels des axes sont les mêmes que pour le plot()
+
+# exemple de boîtes à moustaches
+pyplot.boxplot([1,2,3,4,5,6,7,8,9,10,16,7,8,12])
+pyplot.draw()
+# modification du label en dessous la boite à moustache (1 par défaut)
+pyplot.boxplot([1,2,3,4,5,6,7,8,9,10,16,7,8,12])
+pyplot.xticks([1], ["Ventes"])
+
+# exemple de diagramme circulaire
+pyplot.pie([60, 40], labels=['Hommes', 'Femmes'])
+# l'option autopct='%1.1f%%' permet d'afficher les pourcentages sur le graphique (avec 1 chiffre après la virgule)
+# l'option shadow=True permet de faire un léger effet d'ombre sur le graphique
+pyplot.pie([60.11, 39.89], labels=['Hommes', 'Femmes'], autopct='%1.1f%%', shadow=True)
+```
+
+### Combiner plusieurs graphiques
+
+`subplot()` permet de créer des sous-graphiques pour mettre plusieurs graphiques dans un seul graphique
+
+```py
+pyplot.rcParams['figure.figsize']=[6,6]
+# il y a 3 paramètres pour subplot : nombre de lignes, nombre de colonnes, et l'emplacement sur lequel mettre la figure
+# placement du premier graphique
+pyplot.subplot(211)
+pyplot.bar(achats_clients.keys(), achats_clients.values())
+# placement du deuxième graphique
+pyplot.subplot(212)
+pyplot.pie([60.11, 39.89], labels=['Hommes', 'Femmes'], autopct='%1.1f%%', shadow=True)
+pyplot.tight_layout()
+pyplot.draw()
+```
+
+### Exemple Matplotlib avec un jeu de données
+```py
+import pandas
+# lecture du fichier CSV
+black_friday = pandas.read_csv('./donnees_data_science/BlackFriday.csv')
+# visualisation des premières lignes
+black_friday.head(10)
+# analyse du type des variables, du nombre de lignes et de colonnes
+black_friday.info()
+
+# création d'un DataFrameGroupBy pour faire un graphique sur les dépenses par catégorie d'âge
+age_groupes = black_friday.groupby('Age')
+# création d'un dictionnaire où l'on va stocker pour chaque groupe, la somme des achats
+achats_clients=dict()
+# age correspond à la catégorie d'âge, group est un dataframe qui contient toutes les valeurs de la catégorie d'âge courante
+for age, group in age_groupes:
+    achats_clients[age]=sum(group["Purchase"])
+
+# création d'un diagramme en bâtons pour visualiser les dépenses total par catégorie d'âge
+pyplot.bar(achats_clients.keys(), achats_clients.values())
+pyplot.draw()
+```
+
+### Créer des graphiques avec Seaborn
+
+*Seaborn* est une bibliothèque basé sur *Matplotlib*, plus puissante que cette dernière
+
+```py
+# import de Seaborn
+import seaborn
+
+# création d'une boîte à moustaches horizontale
+seaborn.boxplot([1,2,3,4,5,6,7,8,9,10,16,7,8,12])
+# création d'une boîte à moustaches verticale
+seaborn.boxplot(y=[1,2,3,4,5,6,7,8,9,10,16,7,8,12])
+
+# création d'une boîte à moustaches à partir d'un dataframe (sur la variable des ventes)
+seaborn.boxplot(y="Purchase", data=black_friday)
+# même chose en faisant une boîte à moustache par sexe
+seaborn.boxplot(x='Gender', y="Purchase", data=black_friday)
+# possibilité d'utiliser des options de pyplot comme le titre
+pyplot.title('Analyse des ventes par sexe')
+pyplot.draw()
+
+
+# boîte à moustaches par sexe x tranche d'âge
+# une légende est ajouté pour les tranches d'âge
+# les labels sont automatiquement mis par Seaborn avec le nom des colonnes
+seaborn.boxplot(x='Gender', y="Purchase", data=black_friday, hue='Age')
+# la légende est mal placée, il faut la déplacer pour que le graphique soit bien mis en forme
+# l'option loc=2 met la légende en haut à gauche
+# l'option bbox_to_anchor=(1.05,1) permet de décaler la légende
+# l'option borderaxespad=0. permet de gérer de ldécalage par rapport au haut du graphique
+pyplot.legend(bbox_to_anchor=(1.05,1), loc=2, borderaxespad=0.)
+pyplot.draw()
+
+# diagramme en bâtons pour connaître le nombre d'hommes et de femmes par catégorie d'âge
+seaborn.countplot(x="Age", hue="Gender", data=black_friday)
+
+
+# sample() permet de récupérer aléatoirement un sous-ensemble dans le jeu de données initial
+subset = black_friday.sample(3000)
+# représentation pour chaque observation par un point dans la bonne catégorie
+# ça ressemble à une boîte à moustache sauf que tous les points sont tracés
+seaborn.catplot(x='Age', y='Purchase', data=subset)
+# l'option kind='swarm' permet de ne pas superposer les points sur le graphique
+seaborn.catplot(x='Age', y='Purchase', data=subset, kind="swarm")
+
+# coloration des points selon le sexe
+seaborn.catplot(x='Age', y='Purchase', data=subset, kind="swarm", hue='Gender')
+
+# création de subplot comme avec pyplot
+pyplot.subplot(121)
+seaborn.countplot(x="Age", hue="Gender", data=black_friday)
+pyplot.subplot(122)
+seaborn.boxplot(x='Gender', y="Purchase", data=black_friday)
+pyplot.draw()
+```
