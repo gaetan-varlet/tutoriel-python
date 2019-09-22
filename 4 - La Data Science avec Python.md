@@ -666,3 +666,46 @@ pyplot.subplot(122)
 seaborn.boxplot(x='Gender', y="Purchase", data=black_friday)
 pyplot.draw()
 ```
+
+### Analyse d'un jeu de données avec Seaborn
+
+```py
+import seaborn
+import matplotlib.pyplot
+# chargement d'un jeu de données présent dans seaborn
+tips = seaborn.load_dataset("tips")
+
+# visualisation des premières lignes du jeu de données
+tips.head()
+# analyse rapide du jeu de données : il y a 244 lignes et 7 variables
+tips.info()
+# analyse de la distribution des variables
+tips.describe(include='all')
+# analyse de la distribution par sexe
+tips.groupby('sex').describe()
+
+# représentation du nombre d'additions payé par les hommes et par les femmes avec un diagramme en bâtons
+seaborn.countplot(x="sex", data=tips)
+
+# analyser graphiquement les relations entre les variables numériques (croisement de toutes les variables numériques)
+seaborn.pairplot(tips)
+
+# graphique représentant la distribution de la variable total_bill
+# boîte à moustaches
+seaborn.boxplot(y='total_bill', data=tips)
+# histogramme
+seaborn.distplot(tips['total_bill'])
+# suppression de la courbe tracée sur l'histogramme
+seaborn.distplot(tips['total_bill'], kde=False)
+
+# analyse de la variable total_bill par sexe
+# boîtes à moustaches
+seaborn.boxplot(x='sex', y='total_bill', data=tips)
+# diagrammmes à bâton représentant la moyenne
+seaborn.barplot(x='sex', y='total_bill', data=tips)
+
+# représenter avec un nuage de points la variable total_bill sur l'axe des abcisses et la variable tip sur l'axe des ordonnées afin de voir la corrélation entre les 2
+seaborn.jointplot(x='total_bill', y='tip', data=tips)
+# ajout de l'option kind='reg' pour tracer la relation linéaire entre les 2 variables
+seaborn.jointplot(x='total_bill', y='tip', data=tips, kind='reg')
+```
