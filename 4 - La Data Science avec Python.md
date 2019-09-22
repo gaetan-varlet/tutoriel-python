@@ -4,6 +4,12 @@ Tuto openclassrooms : https://openclassrooms.com/fr/courses/4452741-decouvrez-le
 
 ## Jupyter Notebook
 
+- Jupyter Notebook est un outil très pratique qui permet d'avoir le code source et la sortie au même endroit
+- pour lancer Jupyter Notebook, lancer la commande `jupyter notebook`
+- un notebook est un fichier au format JSON avec l'extension `ipynb`
+- un notebook contient des cellules qui peut contenir du code que l'on peut exécuter
+- il est aussi possible d'écrire du markdown pour mettre en forme le notebook
+
 ## NumPy
 
 - NumPy signifie **Numerical Python**
