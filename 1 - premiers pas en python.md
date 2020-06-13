@@ -95,7 +95,7 @@ La fonction `randint(a,b)` de la librairie `random` permet de générer un nombr
 ```py
 import random
 nombreAleatoire = random.randint(1,5)
-print(nombreAleatoire)
+print(nombreAleatoire) # 1, 2, 3, 4 ou 5
 
 
 from random import randint
@@ -154,7 +154,7 @@ exemple :
 ```py
 i = 0
 while i<10:
-    print("tout de boucle",i)
+    print("tour de boucle",i) # affiche de 0 à 9
     i+=1
 ```
 
@@ -302,7 +302,7 @@ res = calculs.carre(5) # contient 25
 
 ## Tester le module
 
-il est possible de tester le module dans le module lui-même sans que ce test ne s'exécute quand le module est appelé dans un autre fichier. Dans l'exemple ci-dessous, le test n'exécutera que si le module *calculs.py* est exécuté directement.
+il est possible de tester le module dans le module lui-même sans que ce test ne s'exécute quand le module est appelé dans un autre fichier. Dans l'exemple ci-dessous, le test ne s'exécutera que si le module *calculs.py* est exécuté directement.
 ```py
 # module calculs.py
 carre = lambda x: x * x
