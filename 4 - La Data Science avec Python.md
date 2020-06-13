@@ -268,7 +268,7 @@ serie.describe() # donne des informations, sur la distribution de la série (moy
 serie.sum()
 ```
 
-### Les dataframes avec Pandas
+### Les dataframes avec Pandas
 
 Création d'un dataframe à partir d'une liste et d'un dictionnaire
 
@@ -320,7 +320,7 @@ print(df)
 # Thibaut       24.0       NaN
 ```
 
-### Lire et écrire un fichier
+### Lire et écrire un fichier
 
 - pour lire un fichier texte, on peut utiliser les méthodes `read_table()` ou `read_csv()`
 - pour écrire un dataframe dans un fichier, il faut utiliser la méthode `to_csv()`
@@ -351,7 +351,7 @@ df = pandas.read_csv("dataframe.csv")
 # 2    louis     1       80      10
 ```
 
-### Accéder aux éléments d'un dataframe
+### Accéder aux éléments d'un dataframe
 
 - il est possible de remplacer l'index des lignes (1, 2, 3...) par une colonne. Cela va permettre de sélectionner une ligne par son index via la valeur de cette colonne
 
@@ -462,7 +462,7 @@ len(df.loc[df['prenom']=='louis',:])
 df.loc[(df['prenom']=='louis') & (df['poids']>15)]
 ```
 
-### Grouper un dataframe sur une ou plusieurs colonnes (group by)
+### Grouper un dataframe sur une ou plusieurs colonnes (group by)
 
 ```py
 # permet d'obtenir des statistiques sur les variables quantitatives par modalité d'une variable qualitative
@@ -477,7 +477,7 @@ df2.groupby(['sexe','prenom']).describe()
 - *Matplotlib* est la bibliothèque la plus utilisée en Python pour visualiser les données
 - *Seaborn* est une autre bibliothèque de visualisation de données basé sur *Matplotlib*
 
-### Création d'un premier graphique
+### Création d'un premier graphique
 
 ```py
 # import du module pyplot qui suffit à faire des visualisations
@@ -500,7 +500,7 @@ pyplot.plot([1,2,3,4,5], [1,4,9,16,25], marker='o')
 pyplot.plot([1,2,3,4,5], [1,4,9,16,25], marker='o', linestyle='')
 ```
 
-### Ajout d'un titre et de labels aux axes
+### Ajout d'un titre et de labels aux axes
 
 ```py
 pyplot.plot([1,2,3,4,5], [1,4,9,16,25], marker='o', linestyle='')
@@ -532,7 +532,7 @@ pyplot.scatter([1,2,3,4,5], [1,4,9,16,25], c=list([1, 4, 9, 16, 25]), cmap='seis
 pyplot.colorbar()
 ```
 
-### Changer la taille ou la forme des points
+### Changer la taille ou la forme des points
 
 ```py
 # marker permet de changer le type de point, par exemple une croix
@@ -594,7 +594,7 @@ pyplot.tight_layout()
 pyplot.draw()
 ```
 
-### Exemple Matplotlib avec un jeu de données
+### Exemple Matplotlib avec un jeu de données
 ```py
 import pandas
 # lecture du fichier CSV
