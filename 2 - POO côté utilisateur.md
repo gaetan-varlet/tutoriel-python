@@ -472,9 +472,10 @@ print(type(monSet)) # <type 'set'>
 ```
 
 
-## Les fichiers
+## Le module OS
 
 - les méthodes `getcwd()` (CWD = « Current Working Directory ») et `chdir()` (Change Directory) du module `os` permettent de savoir dans quel répertoire on se trouve et de changer de répertoire, grâce au déplacement relatif ou absolu
+
 ```py
 import os
 
@@ -483,13 +484,61 @@ os.chdir("./scripts")
 print(os.getcwd()) # /home/gaetan/depot-github/tutoriel-python/scripts
 ```
 
+- la méthode `makedirs(nomDossier)` permet de créer un dossier
+
+```py
+# exemple de création d'une structure de dossier
+import os
+
+def creer_dossiers(dossiers):
+    base = os.getcwd()
+    for key, values in dossiers.items():
+        for value in values:
+            dossier = '{0}/{1}/{2}'.format(base, key, value)
+            # makedirs créer le dossier parent avant le dossier enfant s'il n'existe pas
+            os.makedirs(dossier)
+
+structure = {
+    "Musique": ["Rock", "Jazz", "Pop"],
+    "Documents": ["Factures", "Travail"]
+}
+
+creer_dossiers(structure)
+```
+
+## Ecriture d'un fichier en JSON
+
+- utilisation du module **json** pour écrire le dictionnaire au format json
+- la méthode `dump()` permet d'écrire le dictionnaire en paramètre dans le fichier spécifié en paramètre
+
+```py
+import os
+import json
+
+def ecrire_json(fichier_json, dictionnaire):
+    with open(fichier_json, 'w') as f:
+        json.dump(dictionnaire, f, indent=4)
+
+fichier_json = os.getcwd() + "/test_json.json"
+ecrire_json(fichier_json, structure)
+```
+
+
+## Les fichiers
+
 - la méthode `open()` permet d'ouvrir un fichier
     - avec le nom du fichier en paramètre (absolu ou relatif)
     - et le mode d'ouverture (`r` en lecture,  `w` en écriture en écrasant le fichier, et `a` (append) en écriture en écrivant à la fin du fichier sans écraser l'ancien contenu). On peut ajouter à tous ces modes le signe `b` pour ouvrir le fichier en mode binaire
     - la méthode crée un objet de la classe `TextIoWrapper`, nous allons utiliser des méthodes de cette classe pour interagir avec le fichier
 - la méthode `read()` renvoie tout le contenu du fichier, que l'on capture dans une chaîne de caractères
+- la méthode `readlines()` renvoie le contenu du fichier dans une liste ou chaque ligne est un élément de la liste
+- la méthode `readline()` lit le fichier ligne à ligne. A chaque fois, qu'on apelle la méthode, il renvoie la ligne suivante
 - la méthode `write('chaîne a écrire')` permet d'écrire une chaîne de caractère dans le fichier. Elle retourne le nombre de caractères écrit. Si on souhaite écrire un autre type que le string, il faut les convertir en chaîne de caractères
 - la méthode `close()` ferme le fichier, ce qui rendra l'accès au fichier à d'autres applications
+- certains attributs permettent d'avoir des informations sur le fichier :
+    - `closed` : True/False si le fichier est ouvert ou fermé
+    - `mode` : 'r', 'w' ou 'a'
+    - `name` : qui renvoie le chemin du fichier
 
 exemple de lecture d'un fichier :
 ```py
@@ -504,6 +553,15 @@ monFichier.close()
 
 lignes = contenu.split('\n') # découpage du fichier ligne par ligne dans un tableau
 print(lignes) # ['contenu de mon fichier', "je m'appelle Gaëtan"]
+```
+
+```py
+f = open('/home/gaetan/depot-github/tutoriel-python/scripts/fichierALire.txt', 'r')
+line = ' '
+while line:
+    line = f.readline()
+    print(line)
+f.close()
 ```
 
 exemple d'écriture dans un fichier :
