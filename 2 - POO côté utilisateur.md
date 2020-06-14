@@ -475,6 +475,7 @@ print(type(monSet)) # <type 'set'>
 ## Le module OS
 
 - les méthodes `getcwd()` (CWD = « Current Working Directory ») et `chdir()` (Change Directory) du module `os` permettent de savoir dans quel répertoire on se trouve et de changer de répertoire, grâce au déplacement relatif ou absolu
+- la méthode `path.isfile(f)` teste si le fichier en paramètre existe et renvoie True ou False
 
 ```py
 import os
@@ -482,6 +483,9 @@ import os
 print(os.getcwd()) # /home/gaetan/depot-github/tutoriel-python
 os.chdir("./scripts")
 print(os.getcwd()) # /home/gaetan/depot-github/tutoriel-python/scripts
+
+f = os.getcwd() + "/test.py"
+print(os.path.isfile(f)) # True ou False si le fichier existe
 ```
 
 - la méthode `makedirs(nomDossier)` permet de créer un dossier
@@ -506,7 +510,7 @@ structure = {
 creer_dossiers(structure)
 ```
 
-## Ecriture d'un fichier en JSON
+## Lecture/Ecriture d'un fichier en JSON
 
 - utilisation du module **json** pour écrire le dictionnaire au format json
 - la méthode `dump()` permet d'écrire le dictionnaire en paramètre dans le fichier spécifié en paramètre
@@ -522,6 +526,18 @@ def ecrire_json(fichier_json, dictionnaire):
 fichier_json = os.getcwd() + "/test_json.json"
 ecrire_json(fichier_json, structure)
 ```
+
+- la méthode `load()` permet de lire le contenu du fichier au format JSON et le stocke dans une variable
+
+```py
+with open(fichier_json, 'r') as f:
+    contenu = json.load(f)
+
+print(type(contenu))  #  <class 'dict'>
+print(contenu)
+# {'Musique': ['Rock', 'Jazz', 'Pop'], 'Documents': ['Factures', 'Travail']}
+```
+
 
 
 ## Les fichiers
