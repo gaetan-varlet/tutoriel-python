@@ -123,3 +123,36 @@ print(moi.age) # 31
 
 
 ## Les méthodes spéciales
+
+
+
+## L'héritage
+
+- l'héritage évite de faire plusieurs classes qui se ressemblent, transmettant les attributs et les méthodes d'une classe mère vers une classe fille
+- la **surcharge** consiste à redéfinir des attributs ou des méthodes de la classe mère.
+
+```py
+class Employe:
+    def __init__(self):
+        self.salaireHoraire = 20
+
+    def printSalaire(self):
+        print("Le salaire d'un employé est de {0}€".format(
+            self.salaireHoraire))
+
+class Ingenieur(Employe):
+    def __init__(self, prenom):
+        super(Ingenieur, self).__init__()
+        self.prenom = prenom
+        self.salaireHoraire = 30
+
+    def printSalaire(self):
+        print("Le salaire d'un ingénieur est de {0}€".format(
+            self.salaireHoraire))
+
+toto = Employe()
+toto.printSalaire()  # Le salaire d'un employé est de 20€
+louis = Ingenieur('Louis')
+print(louis.prenom)  # Louis
+louis.printSalaire()  # Le salaire d'un ingénieur est de 30€
+```
