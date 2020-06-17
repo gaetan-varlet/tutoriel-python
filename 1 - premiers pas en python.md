@@ -265,6 +265,10 @@ var = somme(5,2) # contient 7
 Un module est un bout de code dans un fichier contenant des fonctions et variables. Pour l'utiliser, il faut l'**importer**. Il y a plein de modules disponibles avec Python sans qu'il soit nécessaire d'installer des bibliothèques supplémentaires.
 ```py
 import math # importation du module math
+import os
+
+# __file__ permet de savoir où se trouve le fichier
+print(os.__file__)  #  /usr/lib/python3.8/os.py
 
 math.sqrt(16) # appel d'une fonction du module nomDuModule.nomFonction
 
@@ -339,7 +343,8 @@ res = carre(5) # contient 25
 
 ## Les exceptions
 
-Une exception est une erreur que peut rencontrer Python en exécutant le programme.
+Une exception est une erreur que peut rencontrer Python en exécutant le programme. La gestion des exceptions permet de récupèrer l'erreur pour éviter l'arrêt du programme.
+
 ```py
 File "test.py", line 1, in <module>
     from monPackage import carre
