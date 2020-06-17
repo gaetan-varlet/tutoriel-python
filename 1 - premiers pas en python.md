@@ -103,6 +103,22 @@ nombreAleatoire = randint(1,5)
 print(nombreAleatoire)
 ```
 
+La fonction `isinstance(var, nomClasse)` permet de savoir si un objet est une instance d'une classe ou d'une de ses classes filles
+```py
+a = 'toto'
+print(isinstance(a, object))  # True
+print(isinstance(a, str))  # True
+print(isinstance(a, int))  #  False
+b = [1, 2, 3]
+print(isinstance(b, list))  # True
+```
+
+La fonction `issubclass(var, nomClasse)` permet de savoir si une classe est sous-classe d'une autre
+```py
+print(issubclass(str, object))  # True
+print(issubclass(object, str))  # False
+```
+
 ## Les conditions
 
 ```py
