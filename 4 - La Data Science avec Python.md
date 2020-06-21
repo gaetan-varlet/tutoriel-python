@@ -421,7 +421,7 @@ df.isna().sum() # indique pour chaque colonne le nombre de valeurs manquantes
 dfSansNa = df.dropna() # le tableau ne contient plusq que 2 lignes sur les 3
 df.shape # (2, 4)
 
-# trier un tableau selin une variable (de manière croissante par défaut)
+# trier un tableau selon une variable (de manière croissante par défaut)
 df = df.sort_values(by='poids')
 
 # obtenir le type des variables
