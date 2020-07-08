@@ -2,6 +2,7 @@ import time
 import json
 import requests
 from requests.auth import HTTPBasicAuth
+import urllib3
 
 start_time = time.time()
 r = requests.get('https://github.com/timeline.json')
@@ -21,11 +22,22 @@ print("CONTENU AU FORMAT JSON FORMATE")
 print(json.dumps(r.json(), indent=4))
 
 print("EXEMPLE AVEC TOUCAN")
+hostname = 'http://localhost:8080'
+# hostname = 'https://dvtoucanlht01.ad.insee.intra'
+session = requests.Session()
+# désactivaton proxy
+session.trust_env = False
+# désactivation SSL
+session.verify = False
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
+session.auth = ('admin', 'admin')
+# token = ''
+# headers = {'Authorization': 'Bearer ' + token}
 
 start_time = time.time()
-r2 = requests.get('http://localhost:8080/utilisateur/admin',
-                  auth=HTTPBasicAuth('admin', 'admin'))
+r2 = session.get(hostname + '/utilisateur/admin')
+# r2 = session.get(hostname + '/utilisateur/njykl1', headers=headers)
 print("--- %s seconds ---" % (time.time() - start_time))
 print(r2.status_code)
-print(json.dumps(r2.json(), indent=4))
+print(r2.json())
