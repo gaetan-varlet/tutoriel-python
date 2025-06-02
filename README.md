@@ -43,6 +43,11 @@ Python pour la Data Science
 - Matplotlib et Seaborn : visualisation de données
 - scikit learn (machine learning)
 
+A étudier :
+- Polars : concurrent de Pandas
+- DuckDB
+- PyTorch (apprentissage automatique)
+
 Introduction au Machine Learning
 - Data Preprocessing
 - Régression
