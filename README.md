@@ -1,7 +1,7 @@
 # Tutoriel Python
 
-
 Les bases du langage
+
 - installation et environnement
 - les variables
 - les opérateurs (mathématiques, logiques, de comparaison, d'assignation)
@@ -18,6 +18,7 @@ Les bases du langage
 - les modules
 
 Python avancé
+
 - les objets muables et immuable
 - la fonction enumerate
 - les fonctions anonymes
@@ -37,46 +38,51 @@ Python avancé
 - astuces
 
 Python pour la Data Science
+
 - Jupyter Notebbok
 - NumPy
 - Pandas : manipulation de données (dataframe)
 - Matplotlib et Seaborn : visualisation de données
 - scikit learn (machine learning)
 
-A étudier :
+A étudier
+
 - Polars : concurrent de Pandas
 - DuckDB
 - PyTorch (apprentissage automatique)
 
 Introduction au Machine Learning
+
 - Data Preprocessing
 - Régression
-    - régression linéaire simple
-    - régression linéaire multiple
-    - régression polynomiale
-    - évaluation des modèles de régression
+  - régression linéaire simple
+  - régression linéaire multiple
+  - régression polynomiale
+  - évaluation des modèles de régression
 - Classification
-    - régression logistique
-    - SVM
-    - Kernel SVM
-    - évaluation des modèles de classification
+  - régression logistique
+  - SVM
+  - Kernel SVM
+  - évaluation des modèles de classification
 - Clustering
-    - K-Means
+  - K-Means
 
 Le Deep Learning de A à Z
+
 - Qu'est ce que le Deep Learning
 - ANN (Artificial Neural Networks)
 - CNN (Convolutional Neural Networks)
 - RNN (Recurrent Neural Networks)
-- SOM (Self-Organizing Maps) 
+- SOM (Self-Organizing Maps)
 - BM (Boltzmann Machines)
-- AE (Auto-Encoders) 
+- AE (Auto-Encoders)
 - Bases de Machine Learning
 
 Intelligence Artificielle de A à Z
+
 - Introduction
 - Les Fondamentaux de l'Apprentissage par Renforcement
-    - Q-Learning
+  - Q-Learning
 - Voiture autonome (Deep Q-Learning)
 - Doom (Deep Q-Learning à Convolution)
 - Casse-briques
